@@ -1,0 +1,4 @@
+
+# general 붙은건 범용성을 위한 정확도 개선 과정에서의 데이터셋
+dataset_v1_general_{매장번호}_preprocessed.xlsx : bge 임베딩을 사용
+dataset_v2_general_{매장번호}_preprocessed.xlsx : KoE5 임베딩 사용 ==> 사실 해당 엑셀파일에서는 무의미함. DB 내에서 차이임.

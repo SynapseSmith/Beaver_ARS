@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>인공지능 ARS</title>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+        }
+
+        #title-container {
+            width: 100%;
+            text-align: center;
+            padding: 20px 0;
+            position: absolute;
+            top: 150px;
+            background-color: #f4f4f4;
+            z-index: 10;
+        }
+
+        #container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100%;
+            margin-top: 100px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 30px;
+        }
+
+        button {
+            padding: 20px 40px;
+            font-size: 20px;
+            cursor: pointer;
+            border-radius: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #response {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+
+        #consult-gif {
+            display: none;
+            width: 350px;
+            height: auto;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="title-container">
+        <h1>인공지능 ARS</h1>
+    </div>
+
+    <div id="container">
+        <button id="start-btn">상담 시작하기</button>
+        <img id="consult-gif" src="{{ url_for('static', filename='images/상담.gif') }}">
+        <div id="response"></div>
+    </div>
+
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.410.0.min.js"></script>
+    <script type="text/javascript">
+        AWS.config.region = 'ap-northeast-2';
+        AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+            IdentityPoolId: 'ap-northeast-2:bf5fce7d-c4a9-45c8-82e4-caa69740769a'
+        });
+
+        const responseDiv = document.getElementById('response');
+        const startBtn = document.getElementById('start-btn');
+        const consultGif = document.getElementById('consult-gif');
+        let audio = null;
+        let isTTSPlaying = false;
+
+        const beepSound = new Audio("/static/audio/beep_short_copy.mp3"); // Beep 효과음 추가
+
+        startBtn.addEventListener('click', () => {
+            startBtn.style.display = 'none';
+            consultGif.style.display = 'block';
+            changeGif("상담.gif");
+
+            const initial_text = "안녕하세요, 홍콩반점 구리돌다리점 에이아이 고객 지원 시스템입니다. 무엇을 도와드릴까요?";
+            pollyTTS(initial_text);
+        });
+
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        const recognition = new SpeechRecognition();
+        recognition.lang = 'ko-KR';
+        recognition.interimResults = false;
+        recognition.maxAlternatives = 1;
+        recognition.continuous = true;
+
+        function startRecognition(playBeep = false) {
+            if (playBeep) {
+                beepSound.play().catch(error => {
+                    console.error('Beep 효과음 재생 오류:', error);
+                });
+            }
+            recognition.start();
+            responseDiv.textContent = "음성 인식중입니다. 문의사항을 말씀해주세요.";
+        }
+
+        recognition.addEventListener('result', (event) => {
+            const transcript = event.results[event.results.length - 1][0].transcript.trim();
+            if (!transcript) {
+                console.log("빈 입력이 감지되었습니다.");
+                return;
+            }
+            responseDiv.textContent = `인식된 텍스트: ${transcript}`;
+            recognition.stop(); // 음성 인식 중단
+            sendToServer(transcript);
+        });
+
+        recognition.addEventListener('error', (event) => {
+            responseDiv.textContent = `음성 인식 오류: ${event.error}`;
+        });
+
+        recognition.addEventListener('end', () => {
+            if (!isTTSPlaying) {
+                startRecognition(false); // 효과음 없이 음성 인식 재시작
+            }
+        });
+
+        function sendToServer(transcript) {
+            fetch('/get-response', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ message: transcript })
+            })
+            .then(response => response.json())
+            .then(data => {
+                const text = data.response;
+                responseDiv.textContent = `서버 응답: ${text}`;
+                pollyTTS(text);
+            })
+            .catch(error => {
+                console.error('sendToServer에서 에러남:', error);
+                responseDiv.textContent = `서버 오류: ${error.message || error}`;
+                startRecognition();
+            });
+        }
+
+        function changeGif(gifFilename) {
+            consultGif.src = `/static/images/${gifFilename}`;
+        }
+
+        function pollyTTS(text) {
+            isTTSPlaying = true;
+            recognition.stop(); // TTS 재생 중 음성 인식 중단
+        
+            const polly = new AWS.Polly({ apiVersion: '2016-06-10' });
+            const params = {
+                OutputFormat: "mp3",
+                Text: text,
+                VoiceId: "Seoyeon"
+            };
+        
+            polly.synthesizeSpeech(params, (err, data) => {
+                if (err) {
+                    console.error("TTS 오류: ", err);
+                    responseDiv.textContent = `TTS 오류: ${err.message || err}`;
+                    isTTSPlaying = false;
+                    startRecognition(); // TTS 실패 시 음성 인식 재시작
+                } else if (data && data.AudioStream) {
+                    const blob = new Blob([data.AudioStream], { type: 'audio/mp3' });
+                    const audioUrl = URL.createObjectURL(blob);
+        
+                    if (audio) {
+                        audio.pause();
+                        audio.currentTime = 0;
+                    }
+        
+                    audio = new Audio(audioUrl);
+                    audio.addEventListener('ended', async () => {
+                        isTTSPlaying = false;
+                        playBeepSound(); // TTS 종료 후 효과음 재생
+                        changeGif("음성인식.gif");
+                        await new Promise(resolve => setTimeout(resolve, 1000)); // 효과음 후 딜레이
+                        startRecognition(true); // 효과음 재생 후 음성 인식 시작
+                    });
+        
+                    audio.play().catch((playError) => {
+                        console.error('오디오 재생 에러:', playError);
+                        isTTSPlaying = false;
+                        startRecognition();
+                    });
+                }
+            });
+        }
+        
+        function playBeepSound() {
+            return beepSound.play().catch(error => {
+                console.error('Beep 효과음 재생 오류:', error);
+            });
+        }
+    </script>
+</body>
+</html>

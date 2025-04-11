@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>홍콩반점 강남점 ARS</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+        }
+
+        #title-container {
+            width: 100%;
+            text-align: center;
+            padding: 20px 0;
+            position: absolute;
+            top: 150px; /* 타이틀을 더 아래로 내림 */
+            background-color: #f4f4f4; /* 타이틀 배경색 고정 */
+            z-index: 10;
+        }
+
+        #container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100%;
+            margin-top: 100px; /* 타이틀 아래 충분한 공간 확보 */
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 30px;
+        }
+
+        button {
+            padding: 20px 40px;
+            font-size: 20px;
+            cursor: pointer;
+            border-radius: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #response {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+
+        /* GIF 파일을 넣는 부분 */
+        #consult-gif {
+            display: none;
+            width: 350px; /* GIF 크기 조정 */
+            height: auto;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 타이틀을 고정된 위치에 유지 -->
+    <div id="title-container">
+        <h1>홍콩반점 강남점 ARS</h1>
+    </div>
+
+    <!-- 컨텐츠 중앙 정렬 -->
+    <div id="container">
+        <button id="start-btn">상담 시작하기</button>
+        <img id="consult-gif" src="{{ url_for('static', filename='images/상담.gif') }}">
+        <div id="response"></div>
+    </div>
+
+    <script>
+        const responseDiv = document.getElementById('response');
+        const startBtn = document.getElementById('start-btn');
+        const consultGif = document.getElementById('consult-gif');
+
+        // 첫 인사 및 서버 응답을 받는 함수
+        startBtn.addEventListener('click', () => {
+            startBtn.style.display = 'none';  // 버튼을 숨김
+            consultGif.style.display = 'block';  // GIF를 표시
+
+            // 첫 인사말 TTS 시작 (응답중 GIF로 변경)
+            changeGif("상담.gif");
+
+            const initial_text = " 안녕 ";
+            const utterance = new SpeechSynthesisUtterance(initial_text);
+            utterance.lang = 'ko-KR';  // 한국어 TTS 설정
+            window.speechSynthesis.speak(utterance);
+
+            // TTS가 끝난 후 서버로 요청 전송
+            utterance.onend = () => {
+                changeGif("음성인식.gif");  // 응답 GIF로 변경
+                setTimeout(fetchServerResponse, 500);  // 서버로부터 응답을 가져옴 (딜레이 추가)
+            };
+        });
+
+        // 서버로 요청을 보내고 응답을 받는 함수
+        function fetchServerResponse() {
+            fetch('/get-response', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ message: "사용자가 서버에 문의를 요청했습니다." })  // 서버로 요청 전송
+            })
+            .then(response => response.json())  // 서버로부터 JSON 응답 수신
+            .then(data => {
+                const text = data.response;  // 서버에서 받은 응답 텍스트 추출
+                responseDiv.textContent = `서버 응답: ${text}`;  // 응답 텍스트를 화면에 출력
+
+                // TTS 실행 (새로운 텍스트를 음성으로 변환하기 전, 기존 TTS 취소)
+                window.speechSynthesis.cancel();   // 기존 TTS 취소(!!인터럽트!!)
+                changeGif("상담.gif");  // TTS 중에는 응답중 GIF 표시
+
+                const utterance = new SpeechSynthesisUtterance(text);   // 서버 응답을 음성으로 변환
+                utterance.lang = 'ko-KR';  // 한국어 TTS 설정
+                window.speechSynthesis.speak(utterance);  // TTS 실행
+
+                // TTS 종료 후 동작
+                utterance.onend = () => {
+                    changeGif("상담.gif");  // 상담 GIF로 변경
+                };
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+        // GIF 파일을 변경하는 함수
+        function changeGif(gifFilename) {
+            consultGif.src = `/static/images/${gifFilename}`;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+{
+  "bos_token": "[CLS]",
+  "cls_token": "[CLS]",
+  "do_basic_tokenize": true,
+  "do_lower_case": false,
+  "eos_token": "[SEP]",
+  "mask_token": "[MASK]",
+  "model_max_length": 512,
+  "name_or_path": "klue/roberta-large",
+  "never_split": null,
+  "pad_token": "[PAD]",
+  "sep_token": "[SEP]",
+  "special_tokens_map_file": "/home/user09/.cache/huggingface/hub/models--klue--roberta-large/snapshots/28d911204e9022eda172571ca8cc61eaffd942f7/special_tokens_map.json",
+  "strip_accents": null,
+  "tokenize_chinese_chars": true,
+  "tokenizer_class": "BertTokenizer",
+  "unk_token": "[UNK]"
+}

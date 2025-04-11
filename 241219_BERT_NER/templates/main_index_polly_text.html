@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>인공지능 ARS (텍스트 입력 버전)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0; padding: 0;
+            background-color: #f4f4f4;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: flex-start;
+            height: 100vh;
+        }
+        #title-container {
+            width: 100%;
+            text-align: center;
+            padding: 20px 0;
+            position: absolute; top: 150px;
+            background-color: #f4f4f4;
+            z-index: 10;
+        }
+        #container {
+            display: flex; justify-content: center;
+            align-items: center; flex-direction: column;
+            height: 100%; margin-top: 100px;
+        }
+        h1 {
+            margin: 0; font-size: 30px;
+        }
+        #input-form {
+            display: flex; flex-direction: column;
+            align-items: center; margin: 20px;
+        }
+        #user-text {
+            width: 600px; height: 40px;
+            font-size: 16px; padding: 5px 10px;
+            border-radius: 5px; border: 1px solid #ccc;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 30px; font-size: 18px;
+            cursor: pointer; border-radius: 10px;
+            background-color: #007BFF; color: white;
+            border: none; transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #response {
+            margin-top: 20px; font-size: 18px;
+            text-align: center; width: 80%;
+            max-width: 600px;
+            word-wrap: break-word; /* 긴 텍스트 줄바꿈 */
+        }
+    </style>
+</head>
+<body>
+    <div id="title-container">
+        <h1>인공지능 ARS (텍스트 입력)</h1>
+    </div>
+
+    <div id="container">
+        <!-- 사용자가 텍스트를 입력할 수 있는 폼 -->
+        <div id="input-form">
+            <input type="text" id="user-text" placeholder="문의사항을 입력하세요">
+            <button id="send-btn">전송</button>
+        </div>
+        <div id="response"></div>
+    </div>
+
+    <script type="text/javascript">
+        const responseDiv = document.getElementById('response');
+        const sendBtn = document.getElementById('send-btn');
+        const userTextInput = document.getElementById('user-text');
+
+        // 버튼 클릭 시 동작
+        sendBtn.addEventListener('click', () => {
+            handleUserInput();
+        });
+
+        // 엔터(Enter) 키로도 입력을 제출
+        userTextInput.addEventListener('keydown', (event) => {
+            if (event.key === "Enter") {
+                event.preventDefault(); // 기본 동작(폼 전송 등) 방지
+                handleUserInput();
+            }
+        });
+
+        // 입력된 텍스트를 서버로 전송하는 함수
+        function handleUserInput() {
+            const userText = userTextInput.value.trim();
+            if (userText.length === 0) {
+                responseDiv.textContent = "문의사항을 입력해주세요.";
+                return;
+            }
+            responseDiv.textContent = "서버 응답을 기다리는 중...";
+            sendToServer(userText);
+        }
+
+        // 서버로 텍스트 전송 후, 응답을 받아 화면에 표시
+        function sendToServer(userText) {
+            fetch('/get-response', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ message: userText })
+            })
+            .then(response => response.json())
+            .then(data => {
+                const text = data.response;
+                responseDiv.textContent = `서버 응답: ${text}`;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                responseDiv.textContent = `서버 오류: ${error.message || error}`;
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,2170 @@
+불고기	B-MENU
+가격	O
+은요?	O
+
+김치찌개	B-MENU
+값	O
+은	O
+얼마인가요?	O
+
+회덮밥	B-MENU
+얼마인가요?	O
+
+순대국	B-MENU
+값	O
+은요?	O
+
+비빔밥	B-MENU
+가격	O
+알려	O
+주세요.	O
+
+샐러드	B-MENU
+값	O
+은	O
+얼마인가요?	O
+
+덮밥	B-MENU
+가격	O
+이	O
+얼마예요?	O
+
+스프	B-MENU
+한	O
+그릇	O
+값	O
+은요?	O
+
+김밥	B-MENU
+세트	O
+얼마인가요?	O
+
+해물파전	B-MENU
+가격	O
+알려	O
+주세요.	O
+
+탕수육	B-MENU
+가격	O
+은요?	O
+
+닭갈비	B-MENU
+값	O
+은	O
+얼마입니까?	O
+
+양념치킨	B-MENU
+한	O
+마리	O
+얼마인가요?	O
+
+스테이크	B-MENU
+세트	O
+가격	O
+은요?	O
+
+소고기	B-MENU
+구이	I-MENU
+값	O
+은요?	O
+
+연어	B-MENU
+스테이크	I-MENU
+얼마예요?	O
+
+버섯	B-MENU
+스프	I-MENU
+값	O
+은요?	O
+
+치즈	B-MENU
+오믈렛	I-MENU
+가격	O
+은요?	O
+
+토스트	B-MENU
+세트	O
+얼마인가요?	O
+
+아이스크림	B-MENU
+한	O
+스쿱	O
+값	O
+은요?	O
+
+샌드위치	B-MENU
+세트	O
+얼마인가요?	O
+
+새우튀김	B-MENU
+가격	O
+알려	O
+주세요.	O
+
+감자튀김	B-MENU
+작은	O
+사이즈	O
+는요?	O
+
+야채죽	B-MENU
+가격	O
+은	O
+얼마인가요?	O
+
+계란말이	B-MENU
+한	O
+접시	O
+값	O
+은요?	O
+
+참치	B-MENU
+샌드위치	I-MENU
+얼마인가요?	O
+
+바나나	B-MENU
+주스	I-MENU
+값	O
+은요?	O
+
+오렌지	B-MENU
+주스	I-MENU
+얼마예요?	O
+
+스무디	B-MENU
+한	O
+잔	O
+값	O
+은요?	O
+
+모카	B-MENU
+라떼	I-MENU
+가격	O
+은요?	O
+
+아메리카노	B-MENU
+한	O
+잔	O
+얼마인가요?	O
+
+카푸치노	B-MENU
+값	O
+은요?	O
+
+라면	B-MENU
+한	O
+그릇	O
+값	O
+은요?	O
+
+칼국수	B-MENU
+얼마예요?	O
+
+짬뽕	B-MENU
+가격	O
+은요?	O
+
+물냉면	B-MENU
+값	O
+은	O
+얼마인가요?	O
+
+비빔국수	B-MENU
+얼마예요?	O
+
+수제버거	B-MENU
+가격	O
+은요?	O
+
+햄버거	B-MENU
+세트	O
+얼마인가요?	O
+
+피자	B-MENU
+한	O
+판	O
+값	O
+은요?	O
+
+떡볶이	B-MENU
+값	O
+은요?	O
+
+불고기	B-MENU
+덮밥	I-MENU
+가격	O
+은요?	O
+
+참치	B-MENU
+회	I-MENU
+한	O
+접시	O
+얼마인가요?	O
+
+회덮밥	B-MENU
+세트	O
+얼마인가요?	O
+
+찜닭	B-MENU
+가격	O
+은요?	O
+
+돈가스	B-MENU
+세트	O
+얼마예요?	O
+
+양념갈비	B-MENU
+한	O
+접시	O
+값	O
+은요?	O
+
+순두부찌개	B-MENU
+값	O
+은요?	O
+
+마카롱	B-MENU
+한	O
+개	O
+값	O
+은요?	O
+
+타르트	B-MENU
+한	O
+조각	O
+얼마예요?	O
+
+크로와상	B-MENU
+가격	O
+은요?	O
+
+케이크	B-MENU
+한	O
+조각	O
+값	O
+은요?	O
+
+밀크티	B-MENU
+가격	O
+은요?	O
+
+홍차	B-MENU
+한	O
+잔	O
+값	O
+은요?	O
+
+녹차	B-MENU
+라떼	I-MENU
+값	O
+은요?	O
+
+마끼	B-MENU
+롤	I-MENU
+가격	O
+은요?	O
+
+새우	B-MENU
+초밥	I-MENU
+세트	O
+얼마인가요?	O
+
+생선회	B-MENU
+한	O
+접시	O
+값	O
+은요?	O
+
+광어	B-MENU
+회	I-MENU
+얼마예요?	O
+
+연어	B-MENU
+사시미	I-MENU
+가격	O
+은요?	O
+
+미소된장국	B-MENU
+값	O
+은요?	O
+
+우동	B-MENU
+값	O
+은요?	O
+
+참치	B-MENU
+김밥	I-MENU
+얼마인가요?	O
+
+야채	B-MENU
+주먹밥	I-MENU
+가격	O
+은요?	O
+
+치킨텐더	B-MENU
+세트	O
+얼마예요?	O
+
+모듬튀김	B-MENU
+값	O
+은요?	O
+
+초밥	B-MENU
+한	O
+접시	O
+가격	O
+은요?	O
+
+회전초밥	B-MENU
+세트	O
+얼마인가요?	O
+
+참치	B-MENU
+덮밥	I-MENU
+얼마예요?	O
+
+육회비빔밥	B-MENU
+값	O
+은요?	O
+
+양고기	B-MENU
+스테이크	I-MENU
+얼마인가요?	O
+
+소갈비찜	B-MENU
+값	O
+은요?	O
+
+훈제	B-MENU
+연어	I-MENU
+값	O
+은요?	O
+
+스테이크	B-MENU
+샐러드	I-MENU
+얼마인가요?	O
+
+새우	B-MENU
+샐러드	I-MENU
+가격	O
+은요?	O
+
+연어	B-MENU
+샐러드	I-MENU
+값	O
+은요?	O
+
+소고기	B-MENU
+샐러드	I-MENU
+얼마예요?	O
+
+마늘빵	B-MENU
+한	O
+개	O
+값	O
+은요?	O
+
+감자튀김	B-MENU
+대	O
+사이즈	O
+얼마인가요?	O
+
+치즈	B-MENU
+스틱	I-MENU
+값	O
+은요?	O
+
+프렌치프라이	B-MENU
+가격	O
+은요?	O
+
+옥수수	B-MENU
+구이	I-MENU
+값	O
+은요?	O
+
+마늘	B-MENU
+새우	I-MENU
+값	O
+은요?	O
+
+홍합찜	B-MENU
+가격	O
+은요?	O
+
+꼬치구이	B-MENU
+세트	O
+얼마인가요?	O
+
+생선구이	B-MENU
+값	O
+은요?	O
+
+갈치구이	B-MENU
+값	O
+은요?	O
+
+고등어구이	B-MENU
+얼마인가요?	O
+
+삼겹살	B-MENU
+한	O
+접시	O
+값	O
+은요?	O
+
+돼지갈비	B-MENU
+값	O
+은요?	O
+
+오징어	B-MENU
+튀김	I-MENU
+값	O
+은요?	O
+
+쭈꾸미	B-MENU
+볶음	I-MENU
+얼마인가요?	O
+
+국수	B-MENU
+값	O
+얼마예요?	O
+
+짜장면	B-MENU
+파나요?	O
+
+김밥	B-MENU
+있어요?	O
+
+라면	B-MENU
+판매하나요?	O
+
+피자	B-MENU
+주문	O
+가능해요?	O
+
+이	O
+식당	O
+에서	O
+불고기	B-MENU
+버거	I-MENU
+를	O
+판매하나요?	O
+
+오늘	O
+스파게티	B-MENU
+메뉴	O
+가	O
+있나요?	O
+
+메뉴	O
+에	O
+치즈케이크	B-MENU
+가	O
+포함	O
+되어	O
+있나요?	O
+
+이	O
+카페	O
+에서	O
+아메리카노	B-MENU
+를	O
+제공하나요?	O
+
+오늘	O
+은	O
+햄버거	B-MENU
+세트	I-MENU
+가	O
+있나요?	O
+
+이	O
+레스토랑	O
+에서	O
+샐러드	B-MENU
+를	O
+제공하나요?	O
+
+메뉴	O
+에	O
+티라미수	B-MENU
+가	O
+있나요?	O
+
+이	O
+카페	O
+에서	O
+라떼	B-MENU
+를	O
+판매하나요?	O
+
+메뉴	O
+에	O
+초밥	B-MENU
+이	O
+포함	O
+되어	O
+있나요?	O
+
+이	O
+식당	O
+에서	O
+샌드위치	B-MENU
+를	O
+제공하나요?	O
+
+메뉴	O
+에	O
+글루텐	O
+프리	O
+피자	B-MENU
+가	O
+있나요?	O
+
+해산물	B-MENU
+파스타	I-MENU
+를	O
+판매하나요?	O
+
+이	O
+카페	O
+에서	O
+디카페인	B-MENU
+커피	I-MENU
+를	O
+판매하나요?	O
+
+불고기	B-MENU
+있나요?	O
+
+김치찌개	B-MENU
+팔아요?	O
+
+회덮밥	B-MENU
+주문	O
+가능해요?	O
+
+순대국	B-MENU
+판매하나요?	O
+
+비빔밥	B-MENU
+있습니까?	O
+
+샐러드	B-MENU
+주문	O
+되나요?	O
+
+덮밥	B-MENU
+판매합니까?	O
+
+스프	B-MENU
+있나요?	O
+
+김밥	B-MENU
+세트	I-MENU
+판매하나요?	O
+
+해물파전	B-MENU
+주문	O
+가능합니까?	O
+
+탕수육	B-MENU
+있나요?	O
+
+닭갈비	B-MENU
+판매	O
+합니까?	O
+
+양념치킨	B-MENU
+있나요?	O
+
+스테이크	B-MENU
+세트	I-MENU
+판매하나요?	O
+
+소고기	B-MENU
+구이	I-MENU
+있나요?	O
+
+연어	B-MENU
+스테이크	I-MENU
+있습니까?	O
+
+버섯	B-MENU
+스프	I-MENU
+있나요?	O
+
+치즈	B-MENU
+오믈렛	I-MENU
+판매하나요?	O
+
+토스트	B-MENU
+세트	I-MENU
+있나요?	O
+
+아이스크림	B-MENU
+판매합니까?	O
+
+샌드위치	B-MENU
+세트	I-MENU
+팔아요?	O
+
+새우튀김	B-MENU
+있습니까?	O
+
+감자튀김	B-MENU
+작은	O
+사이즈	O
+있나요?	O
+
+야채죽	B-MENU
+판매해요?	O
+
+계란말이	B-MENU
+한	O
+접시	O
+있습니까?	O
+
+참치	B-MENU
+샌드위치	I-MENU
+있나요?	O
+
+바나나	B-MENU
+주스	I-MENU
+팔아요?	O
+
+오렌지	B-MENU
+주스	I-MENU
+있습니까?	O
+
+스무디	B-MENU
+한	O
+잔	O
+있나요?	O
+
+모카	B-MENU
+라떼	I-MENU
+있습니까?	O
+
+아메리카노	B-MENU
+한	O
+잔	O
+판매되나요?	O
+
+카푸치노	B-MENU
+판매합니까?	O
+
+라면	B-MENU
+팔아요?	O
+
+칼국수	B-MENU
+주문	O
+가능해요?	O
+
+짬뽕	B-MENU
+판매하나요?	O
+
+물냉면	B-MENU
+있습니까?	O
+
+비빔국수	B-MENU
+있나요?	O
+
+수제버거	B-MENU
+판매되나요?	O
+
+햄버거	B-MENU
+세트	I-MENU
+있습니까?	O
+
+피자	B-MENU
+한	O
+판	O
+있나요?	O
+
+떡볶이	B-MENU
+있습니까?	O
+
+불고기	B-MENU
+덮밥	I-MENU
+판매하나요?	O
+
+참치	B-MENU
+회	I-MENU
+한	O
+접시	O
+있나요?	O
+
+회덮밥	B-MENU
+세트	I-MENU
+판매합니까?	O
+
+찜닭	B-MENU
+판매되나요?	O
+
+돈가스	B-MENU
+세트	I-MENU
+있나요?	O
+
+양념갈비	B-MENU
+있습니까?	O
+
+순두부찌개	B-MENU
+판매해요?	O
+
+마카롱	B-MENU
+한	O
+개	O
+있나요?	O
+
+타르트	B-MENU
+한	O
+조각	O
+있습니까?	O
+
+크로와상	B-MENU
+판매합니까?	O
+
+케이크	B-MENU
+한	O
+조각	O
+있나요?	O
+
+밀크티	B-MENU
+있습니까?	O
+
+홍차	B-MENU
+한	O
+잔	O
+판매되나요?	O
+
+녹차	B-MENU
+라떼	I-MENU
+판매합니까?	O
+
+마끼	B-MENU
+롤	I-MENU
+있나요?	O
+
+새우	B-MENU
+초밥	I-MENU
+세트	O
+판매되나요?	O
+
+생선회	B-MENU
+한	O
+접시	O
+있습니까?	O
+
+광어	B-MENU
+회	I-MENU
+있나요?	O
+
+연어	B-MENU
+사시미	I-MENU
+판매하나요?	O
+
+미소된장국	B-MENU
+있나요?	O
+
+우동	B-MENU
+있습니까?	O
+
+참치	B-MENU
+김밥	I-MENU
+있나요?	O
+
+야채	B-MENU
+주먹밥	I-MENU
+판매합니까?	O
+
+치킨텐더	B-MENU
+세트	I-MENU
+있나요?	O
+
+모듬튀김	B-MENU
+판매합니까?	O
+
+초밥	B-MENU
+한	O
+접시	O
+있나요?	O
+
+회전초밥	B-MENU
+세트	I-MENU
+있습니까?	O
+
+참치	B-MENU
+덮밥	I-MENU
+판매되나요?	O
+
+육회비빔밥	B-MENU
+있나요?	O
+
+양고기	B-MENU
+스테이크	I-MENU
+판매합니까?	O
+
+소갈비찜	B-MENU
+있습니까?	O
+
+훈제	B-MENU
+연어	I-MENU
+있나요?	O
+
+스테이크	B-MENU
+샐러드	I-MENU
+있습니까?	O
+
+새우	B-MENU
+샐러드	I-MENU
+판매되나요?	O
+
+연어	B-MENU
+샐러드	I-MENU
+있습니까?	O
+
+소고기	B-MENU
+샐러드	I-MENU
+판매합니까?	O
+
+마늘빵	B-MENU
+한	O
+개	O
+있나요?	O
+
+감자튀김	B-MENU
+대	O
+사이즈	O
+있습니까?	O
+
+치즈	B-MENU
+스틱	I-MENU
+판매하나요?	O
+
+프렌치프라이	B-MENU
+있나요?	O
+
+옥수수	B-MENU
+구이	I-MENU
+판매되나요?	O
+
+마늘	B-MENU
+새우	I-MENU
+판매합니까?	O
+
+홍합찜	B-MENU
+있습니까?	O
+
+꼬치구이	B-MENU
+세트	I-MENU
+있나요?	O
+
+생선구이	B-MENU
+판매합니까?	O
+
+갈치구이	B-MENU
+있습니까?	O
+
+고등어구이	B-MENU
+판매되나요?	O
+
+삼겹살	B-MENU
+판매하나요?	O
+
+돼지갈비	B-MENU
+있습니까?	O
+
+오징어	B-MENU
+튀김	I-MENU
+판매합니까?	O
+
+쭈꾸미	B-MENU
+볶음	I-MENU
+있습니까?	O
+
+제로페이	B-PAYMENT
+결제	O
+가능한가요?	O
+
+제로페이	B-PAYMENT
+로	O
+결제	O
+되나요?	O
+
+간편	O
+결제	O
+로	O
+가능한거	O
+뭐	O
+있나요?	O
+
+애플페이	B-PAYMENT
+되나요?	O
+
+네이버페이	B-PAYMENT
+되나요?	O
+
+카카오페이	B-PAYMENT
+가능하죠?	O
+
+결제	O
+수단	O
+알려줄래요?	O
+
+애플페이	B-PAYMENT
+결제	O
+가능한가요?	O
+
+카카오페이	B-PAYMENT
+결제	O
+가능한가요?	O
+
+비버페이	B-PAYMENT
+결제	O
+가능한가요?	O
+
+간편	O
+결제	O
+수단	O
+을	O
+알려줄	O
+수	O
+있나요?	O
+
+지역페이	B-PAYMENT
+사용	O
+가능한가요?	O
+
+지역	O
+에서만	O
+사용	O
+가능한	O
+페이	B-PAYMENT
+도	O
+되나요?	O
+
+지역페이	B-PAYMENT
+쓸	O
+수	O
+있나요?	O
+
+지역페이	B-PAYMENT
+어떤거	O
+쓸	O
+수	O
+있는지	O
+알려줄래요?	O
+
+계좌이체	B-PAYMENT
+가능한가요?	O
+
+계좌이체	B-PAYMENT
+도	O
+받으시죠?	O
+
+카카오페이	B-PAYMENT
+결제	O
+가능합니까?	O
+
+페이코	B-PAYMENT
+로	O
+결제	O
+할	O
+수	O
+있나요?	O
+
+삼성페이	B-PAYMENT
+사용	O
+가능한가요?	O
+
+네이버페이	B-PAYMENT
+로	O
+결제	O
+할	O
+수	O
+있습니까?	O
+
+제로페이	B-PAYMENT
+사용	O
+가능한가요?	O
+
+알리페이	B-PAYMENT
+사용	O
+가능한가요?	O
+
+신용카드	B-PAYMENT
+로	O
+결제	O
+할	O
+수	O
+있나요?	O
+
+현금	B-PAYMENT
+결제	O
+는	O
+가능합니까?	O
+
+체크카드	B-PAYMENT
+를	O
+사용할	O
+수	O
+있나요?	O
+
+해외	O
+발급	O
+카드	B-PAYMENT
+도	O
+사용	O
+가능합니까?	O
+
+계좌이체	B-PAYMENT
+로	O
+지불할	O
+수	O
+있나요?	O
+
+애플페이	B-PAYMENT
+결제	O
+가	O
+지원되나요?	O
+
+모바일	B-PAYMENT
+결제	O
+를	O
+받을	O
+수	O
+있습니까?	O
+
+상품권	B-PAYMENT
+으로	O
+결제할	O
+수	O
+있나요?	O
+
+QR코드	B-PAYMENT
+결제	O
+를	O
+지원하나요?	O
+
+무통장	B-PAYMENT
+입금	I-PAYMENT
+이	O
+가능한가요?	O
+
+포인트	B-PAYMENT
+로	O
+지불이	O
+가능한가요?	O
+
+교통카드	B-PAYMENT
+사용	O
+이	O
+가능합니까?	O
+
+기프티콘	B-PAYMENT
+으로	O
+결제할	O
+수	O
+있습니까?	O
+
+은행	O
+계좌	B-PAYMENT
+송금	I-PAYMENT
+이	O
+가능한가요?	O
+
+바우처	B-PAYMENT
+로	O
+결제할	O
+수	O
+있나요?	O
+
+기프트	B-PAYMENT
+카드	I-PAYMENT
+사용	O
+가능합니까?	O
+
+페이팔	B-PAYMENT
+결제	O
+를	O
+지원하나요?	O
+
+선불	B-PAYMENT
+카드	I-PAYMENT
+결제	O
+가	O
+가능한가요?	O
+
+QR	B-PAYMENT
+결제	I-PAYMENT
+를	O
+이용할	O
+수	O
+있습니까?	O
+
+모바일	B-PAYMENT
+앱	O
+을	O
+통한	O
+결제	O
+가	O
+가능합니까?	O
+
+결제	O
+수단	O
+등록	O
+이	O
+가능한가요?	O
+
+전화	O
+결제	O
+를	O
+받을	O
+수	O
+있나요?	O
+
+수표	B-PAYMENT
+결제	O
+가	O
+허용됩니까?	O
+
+기프트	B-PAYMENT
+바우처	I-PAYMENT
+사용	O
+이	O
+가능한가요?	O
+
+거래	O
+내역	O
+조회	O
+가	O
+지원됩니까?	O
+
+선불	B-PAYMENT
+기프트	I-PAYMENT
+카드	O
+가	O
+사용	O
+가능한가요?	O
+
+지불	O
+후	O
+자동	O
+확인	O
+이	O
+됩니까?	O
+
+모바일	B-PAYMENT
+결제	O
+앱	O
+을	O
+사용할	O
+수	O
+있나요?	O
+
+계좌이체	B-PAYMENT
+가능합니까?	O
+
+애플페이	B-PAYMENT
+사용	O
+가능한가요?	O
+
+모바일	B-PAYMENT
+결제	O
+되나요?	O
+
+상품권	B-PAYMENT
+사용	O
+돼요?	O
+
+QR코드	B-PAYMENT
+결제	O
+가능해요?	O
+
+포인트	B-PAYMENT
+결제	O
+되나요?	O
+
+교통카드	B-PAYMENT
+되나요?	O
+
+기프티콘	B-PAYMENT
+사용	O
+가능한가요?	O
+
+온라인	O
+결제	O
+되나요?	O
+
+수요일	B-DAY
+영업	O
+시작	O
+시간	O
+이	O
+언제야?	O
+
+토요일	B-DAY
+몇	O
+시에	O
+마감해?	O
+
+화요일	B-DAY
+매장	O
+운영	O
+시간	O
+은	O
+몇	O
+시부터야?	O
+
+월요일	B-DAY
+매장	O
+여는	O
+시간	O
+알려줘.	O
+
+일요일	B-DAY
+에	O
+가게	O
+문	O
+닫는	O
+시간	O
+은?	O
+
+수요일	B-DAY
+몇	O
+시부터	O
+운영해?	O
+
+금요일	B-DAY
+몇	O
+시부터	O
+운영해?	O
+
+월요일	B-DAY
+몇	O
+시에	O
+문	O
+열어?	O
+
+목요일	B-DAY
+몇	O
+시에	O
+문	O
+열어?	O
+
+수요일	B-DAY
+몇	O
+시에	O
+문	O
+닫아?	O
+
+월요일	B-DAY
+영업	O
+시작	O
+시간	O
+이	O
+언제야?	O
+
+토요일	B-DAY
+영업	O
+시간	O
+알려줄래?	O
+
+목요일	B-DAY
+몇	O
+시에	O
+시작해?	O
+
+일요일	B-DAY
+영업	O
+끝나는	O
+시간	O
+은?	O
+
+토요일	B-DAY
+몇	O
+시까지	O
+열려	O
+있어?	O
+
+금요일	B-DAY
+매장	O
+운영	O
+시간은	O
+몇	O
+시부터야?	O
+
+금요일	B-DAY
+몇	O
+시에	O
+문	O
+열어?	O
+
+화요일	B-DAY
+몇	O
+시에	O
+가게	O
+열어?	O
+
+일요일	B-DAY
+가게	O
+운영	O
+시간	O
+언제야?	O
+
+화요일	B-DAY
+몇	O
+시에	O
+문	O
+열어?	O
+
+월요일	B-DAY
+영업	O
+종료	O
+시간이	O
+언제야?	O
+
+토요일	B-DAY
+영업	O
+종료	O
+시간이	O
+언제야?	O
+
+목요일	B-DAY
+에	O
+매장	O
+운영	O
+시간은	O
+언제야?	O
+
+일요일	B-DAY
+몇	O
+시부터	O
+운영해?	O
+
+화요일	B-DAY
+영업	O
+종료	O
+시간이	O
+언제야?	O
+
+수요일	B-DAY
+영업	O
+시간	O
+알려줄래?	O
+
+월요일	B-DAY
+영업	O
+마감은	O
+몇	O
+시야?	O
+
+수요일	B-DAY
+에	O
+매장	O
+운영	O
+시간은	O
+언제야?	O
+
+월요일	B-DAY
+영업	O
+시간	O
+알려줄래?	O
+
+일요일	B-DAY
+몇	O
+시까지	O
+열려	O
+있어?	O
+
+토요일	B-DAY
+영업	O
+마감은	O
+몇	O
+시야?	O
+
+토요일	B-DAY
+운영	O
+시간이	O
+몇	O
+시부터야?	O
+
+일요일	B-DAY
+몇	O
+시에	O
+문	O
+열어?	O
+
+수요일	B-DAY
+영업	O
+끝나는	O
+시간은?	O
+
+목요일	B-DAY
+에	O
+몇	O
+시부터	O
+영업해?	O
+
+화요일	B-DAY
+몇	O
+시까지	O
+열려	O
+있어?	O
+
+월요일	B-DAY
+에	O
+가게	O
+문	O
+닫는	O
+시간은?	O
+
+화요일	B-DAY
+에	O
+가게	O
+문	O
+닫는	O
+시간은?	O
+
+일요일	B-DAY
+영업	O
+시작은	O
+몇	O
+시부터야?	O
+
+목요일	B-DAY
+영업	O
+끝나는	O
+시간은?	O
+
+토요일	B-DAY
+몇	O
+시부터	O
+운영해?	O
+
+일요일	B-DAY
+몇	O
+시에	O
+마감해?	O
+
+금요일	B-DAY
+영업	O
+시작	O
+시간이	O
+언제야?	O
+
+목요일	B-DAY
+에	O
+가게	O
+문	O
+닫는	O
+시간은?	O
+
+월요일	B-DAY
+영업시간	O
+언제야?	O
+
+금요일	B-DAY
+몇	O
+시까지	O
+열려	O
+있어?	O
+
+화요일	B-DAY
+몇	O
+시에	O
+마감해?	O
+
+목요일	B-DAY
+운영	O
+시간이	O
+몇	O
+시부터야?	O
+
+화요일	B-DAY
+운영	O
+시간이	O
+몇	O
+시부터야?	O
+
+수요일	B-DAY
+영업	O
+은	O
+몇	O
+시에	O
+시작해?	O
+
+금요일	B-DAY
+영업	O
+시작은	O
+몇	O
+시부터야?	O
+
+토요일	B-DAY
+몇	O
+시에	O
+문	O
+닫아?	O
+
+일요일	B-DAY
+몇	O
+시에	O
+문	O
+닫아?	O
+
+일요일	B-DAY
+영업	O
+마감은	O
+몇	O
+시야?	O
+
+금요일	B-DAY
+영업	O
+끝나는	O
+시간은?	O
+
+목요일	B-DAY
+영업	O
+은	O
+몇	O
+시에	O
+시작해?	O
+
+토요일	B-DAY
+에	O
+몇	O
+시부터	O
+영업해?	O
+
+금요일	B-DAY
+몇	O
+시에	O
+마감해?	O
+
+목요일	B-DAY
+몇	O
+시에	O
+가게	O
+열어?	O
+
+월요일	B-DAY
+영업	O
+끝나는	O
+시간은?	O
+
+월요일	B-DAY
+에	O
+매장	O
+운영	O
+시간은	O
+언제야?	O
+
+일요일	B-DAY
+영업	O
+종료	O
+시간이	O
+언제야?	O
+
+수요일	B-DAY
+몇	O
+시에	O
+마감해?	O
+
+금요일	B-DAY
+영업	O
+은	O
+몇	O
+시에	O
+시작해?	O
+
+월요일	B-DAY
+매장	O
+운영	O
+시간은	O
+몇	O
+시부터야?	O
+
+수요일	B-DAY
+몇	O
+시에	O
+가게	O
+열어?	O
+
+월요일	B-DAY
+몇	O
+시에	O
+문	O
+열어?	O
+
+화요일	B-DAY
+에	O
+몇	O
+시부터	O
+영업해?	O
+
+수요일	B-DAY
+에	O
+몇	O
+시부터	O
+영업해?	O
+
+월요일	B-DAY
+영업	O
+은	O
+몇	O
+시에	O
+시작해?	O
+
+월요일	B-DAY
+몇	O
+시에	O
+가게	O
+열어?	O
+
+목요일	B-DAY
+매장	O
+여는	O
+시간	O
+알려줘.	O
+
+일요일	B-DAY
+영업	O
+은	O
+몇	O
+시에	O
+시작해?	O
+
+수요일	B-DAY
+매장	O
+여는	O
+시간	O
+알려줘.	O
+
+금요일	B-DAY
+에	O
+매장	O
+운영	O
+시간은	O
+언제야?	O
+
+수요일	B-DAY
+영업	O
+마감은	O
+몇	O
+시야?	O
+
+목요일	B-DAY
+영업	O
+종료	O
+시간이	O
+언제야?	O
+
+화요일	B-DAY
+영업	O
+마감은	O
+몇	O
+시야?	O
+
+토요일	B-DAY
+영업	O
+은	O
+몇	O
+시에	O
+시작해?	O
+
+화요일	B-DAY
+영업시간	O
+언제야?	O
+
+짜장면	B-MENU
+팔아?	O
+
+스파게티	B-MENU
+는	O
+얼마인가요?	O
+
+김밥	B-MENU
+은	O
+있나요?	O
+
+치킨	B-MENU
+메뉴	O
+가격	O
+알려주세요.	O
+
+샌드위치	B-MENU
+도	O
+파나요?	O
+
+우동	B-MENU
+은	O
+몇	O
+가지	O
+종류	O
+가	O
+있나요?	O
+
+피자	B-MENU
+한	O
+판	O
+가격	O
+이	O
+얼마예요?	O
+
+비빔밥	B-MENU
+은	O
+판매	O
+하시나요?	O
+
+햄버거	B-MENU
+세트	O
+얼마인가요?	O
+
+초밥	B-MENU
+은	O
+몇	O
+개	O
+들어있나요?	O
+
+돈가스	B-MENU
+는	O
+메뉴	O
+에	O
+있나요?	O
+
+라면	B-MENU
+한	O
+그릇	O
+가격	O
+알려주세요.	O
+
+팥빙수	B-MENU
+팔아요?	O
+
+떡볶이	B-MENU
+가격	O
+은	O
+얼마예요?	O
+
+스테이크	B-MENU
+는	O
+어떤	O
+종류	O
+가	O
+있나요?	O
+
+아이스크림	B-MENU
+도	O
+있나요?	O
+
+탕수육	B-MENU
+소자	O
+가격	O
+은요?	O
+
+커피	B-MENU
+종류	O
+가	O
+어떤	O
+게	O
+있나요?	O
+
+치즈버거	B-MENU
+가격	O
+은	O
+얼마인가요?	O
+
+샐러드	B-MENU
+는	O
+메뉴	O
+에	O
+포함되나요?	O
+
+초콜릿	B-MENU
+케이크	I-MENU
+있나요?	O
+
+생선구이	B-MENU
+가격	O
+알려주세요.	O
+
+칼국수	B-MENU
+얼마인가요?	O
+
+핫도그	B-MENU
+는	O
+파나요?	O
+
+디저트	B-MENU
+메뉴	O
+는	O
+어떤	O
+게	O
+있나요?	O
+
+오므라이스	B-MENU
+가격	O
+은요?	O
+
+버블티	B-MENU
+종류	O
+있나요?	O
+
+탕짜면	B-MENU
+은	O
+얼마인가요?	O
+
+국밥	B-MENU
+한	O
+그릇	O
+얼마인가요?	O
+
+디저트	B-MENU
+는	O
+따로	O
+판매	O
+하시나요?	O
+
+라면	B-MENU
+한	O
+그릇	O
+주문	O
+할	O
+수	O
+있나요?	O
+
+떡볶이	B-MENU
+1인분	O
+가격	O
+알려주세요.	O
+
+쟁반짜장	B-MENU
+은	O
+얼마야?	O
+
+고기짬뽕	B-MENU
+은	O
+얼마야?	O
+
+고기짜장	B-MENU
+은	O
+얼마야?	O
+
+고추짬뽕	B-MENU
+은	O
+얼마야?	O
+
+고추짜장	B-MENU
+얼마야?	O
+
+짬뽕	B-MENU
+얼마야?	O
+
+짜장	B-MENU
+얼마야?	O
+
+탕짬면	B-MENU
+얼마야?	O
+
+탕짜면	B-MENU
+얼마야?	O
+
+백짬뽕	B-MENU
+얼마야?	O
+
+냉짬뽕	B-MENU
+얼마야?	O
+
+볶음짬뽕	B-MENU
+얼마야?	O
+
+15주년행사	B-MENU
+짜장면	I-MENU
+얼마야?	O
+
+15주년행사	B-MENU
+짬뽕	I-MENU
+얼마야?	O
+
+굴짬뽕	B-MENU
+얼마야?	O
+
+행사	B-MENU
+탕짜면	I-MENU
+얼마야?	O
+
+탕짬밥	B-MENU
+은	O
+얼마야?	O
+
+탕짜밥	B-MENU
+얼마야?	O
+
+만능매운소스	B-MENU
+얼마야?	O
+
+고기짬뽕밥	B-MENU
+은	O
+얼마야?	O
+
+고추짬뽕밥	B-MENU
+은	O
+얼마야?	O
+
+짬뽕밥	B-MENU
+얼마야?	O
+
+짜장밥	B-MENU
+얼마야?	O
+
+15주년행사	B-MENU
+짜장밥	I-MENU
+얼마야?	O
+
+15주년행사	B-MENU
+짬뽕밥	I-MENU
+은	O
+얼마야?	O
+
+15주년행사	B-MENU
+고추짬뽕밥	I-MENU
+얼마야?	O
+
+15주년행사	B-MENU
+고기짬뽕밥	I-MENU
+얼마야?	O
+
+굴짬뽕	B-MENU
+밥	I-MENU
+은	O
+얼마야?	O
+
+백짬뽕	B-MENU
+밥	I-MENU
+은	O
+얼마야?	O
+
+계란후라이	B-MENU
+얼마야?	O
+
+공기밥	B-MENU
+이	O
+얼마야일까?	O
+
+해쉬브라운	B-MENU
+얼마야?	O
+
+만능매운소스	B-MENU
+5개	I-MENU
+얼마야?	O
+
+양념소스	B-MENU
+얼마야?	O
+
+짬뽕국물	B-MENU
+얼마야?	O
+
+3천원할인	B-MENU
+식사2인	I-MENU
+탕수육	I-MENU
+얼마야?	O
+
+2인세트	B-MENU
+얼마야?	O
+
+2천원할인	B-MENU
+쟁반짜장	I-MENU
+탕수육	I-MENU
+은	O
+얼마야?	O
+
+2천원할인	B-MENU
+식사2인	I-MENU
+탕수육	I-MENU
+얼마야?	O
+
+4인세트	B-MENU
+는	O
+얼마야?	O
+
+3인세트	B-MENU
+얼마야?	O
+
+1인세트	B-MENU
+는	O
+얼마야?	O
+
+식사	B-MENU
+4인세트	I-MENU
+얼마야?	O
+
+깐풍새우	B-MENU
+얼마야?	O
+
+깐풍기	B-MENU
+얼마야?	O
+
+꿔바러우	B-MENU
+얼마야?	O
+
+쟁반볶음짬뽕	B-MENU
+얼마야?	O
+
+크림새우	B-MENU
+얼마야?	O
+
+10병	B-MENU
+한정할인	I-MENU
+연태고량주	I-MENU
+소	I-MENU
+얼마야?	O
+
+10병	B-MENU
+한정할인	I-MENU
+연태고량주	I-MENU
+중	I-MENU
+얼마야?	O
+
+초록매실	B-MENU
+은	O
+얼마야?	O
+
+환타	B-MENU
+얼마야?	O
+
+사이다	B-MENU
+얼마야?	O
+
+제로콜라	B-MENU
+얼마야?	O
+
+펩시콜라	B-MENU
+얼마야?	O
+
+스프라이트	B-MENU
+얼마야?	O
+
+코카콜라	B-MENU
+얼마야?	O
+
+제로스프라이트	B-MENU
+는	O
+얼마야?	O
+
+뽀로로	B-MENU
+얼마야?	O
+
+제로펩시	B-MENU
+얼마야?	O
+
+암바사	B-MENU
+얼마야?	O
+
+연태고량주	B-MENU
+얼마야?	O
+
+켈리	B-MENU
+얼마야?	O
+
+카스	B-MENU
+얼마야?	O
+
+대선	B-MENU
+은	O
+얼마야?	O
+
+새로	B-MENU
+얼마야?	O
+
+좋은데이	B-MENU
+얼마야?	O
+
+처음처럼	B-MENU
+얼마야?	O
+
+참이슬	B-MENU
+오리지널	I-MENU
+은	O
+얼마야?	O
+
+참이슬	B-MENU
+후레쉬	I-MENU
+얼마야?	O
+
+진로	B-MENU
+얼마야?	O
+
+국산소주	B-MENU
+얼마야?	O
+
+국산맥주	B-MENU
+얼마야?	O
+
+칭따오	B-MENU
+얼마야?	O
+
+테라	B-MENU
+얼마야?	O
+
+만만춘	B-MENU
+얼마야?	O
+
+홍콩	B-MENU
+하이볼	I-MENU
+얼마야?	O
+
+미상	B-MENU
+하이볼	I-MENU
+얼마야?	O
+
+니하오	B-MENU
+얼마야?	O
+
+산지천	B-MENU
+얼마야?	O
+
+행사생맥주	B-MENU
+얼마야?	O
+
+5천원할인	B-MENU
+연태구냥	I-MENU
+중	I-MENU
+얼마야?	O
+
+산지천	B-MENU
+반병	I-MENU
+얼마야?	O
+
+5천원할인	B-MENU
+산지천	I-MENU
+얼마야?	O
+
+단팥춘권	B-MENU
+얼마야?	O
+
+멘보샤	B-MENU
+얼마야?	O
+
+연유꽃빵	B-MENU
+얼마야?	O
+
+군만두	B-MENU
+얼마야?	O
+
+치킨반반탕슉	B-MENU
+얼마야?	O
+
+탕수육	B-MENU
+얼마야?	O
+
+군만두	B-MENU
+반접시	I-MENU
+얼마야?	O
+
+15주년행사	B-MENU
+탕수육	I-MENU
+얼마야?	O
+
+해물육교자	B-MENU
+얼마야?	O

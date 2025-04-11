@@ -1,0 +1,46 @@
+﻿2024-12-17 15:48:36,805 [__main__] [INFO] :: *** 15h-48m-36s START ***
+2024-12-17 15:48:36,805 [__main__] [INFO] :: *** PID: 1733087 ***
+2024-12-17 15:49:23,342 [__main__] [INFO] :: Received message: 메뉴 뭐 있어
+2024-12-17 15:49:23,597 [__main__] [INFO] :: Intent ID: 0
+2024-12-17 15:49:23,708 [__main__] [INFO] :: Response: 홍콩반점0410 구리돌다리점에서는 면류, 반반메뉴, 밥류, 사이드, 세트메뉴, 주류, 튀김류와 같은 메뉴를 판매하고 있습니다.
+2024-12-17 15:49:23,708 [__main__] [INFO] :: Processing Time: 0.3669 seconds
+2024-12-17 15:49:27,820 [__main__] [INFO] :: Received message: 인기 매니 알려 줘
+2024-12-17 15:49:27,844 [__main__] [INFO] :: Intent ID: 1
+2024-12-17 15:49:27,875 [__main__] [INFO] :: Response: 홍콩반점0410 구리돌다리점에서 고객님들이 가장 많이 찾는 메뉴는 냉짬뽕 입니다.
+2024-12-17 15:49:27,875 [__main__] [INFO] :: Processing Time: 0.0562 seconds
+2024-12-17 15:49:31,879 [__main__] [INFO] :: Received message: 인기 메뉴 알려 줘
+2024-12-17 15:49:31,901 [__main__] [INFO] :: Intent ID: 1
+2024-12-17 15:49:31,931 [__main__] [INFO] :: Response: 홍콩반점0410 구리돌다리점에서 대표 메뉴로서 백짬뽕 메뉴를 추천드립니다.
+2024-12-17 15:49:31,931 [__main__] [INFO] :: Processing Time: 0.0524 seconds
+2024-12-17 15:49:35,549 [__main__] [INFO] :: Received message: 포인트 정책 어떻게 돼
+2024-12-17 15:49:35,571 [__main__] [INFO] :: Intent ID: 16
+2024-12-17 15:49:35,602 [__main__] [INFO] :: Response: 홍콩반점0410 구리돌다리점의 포인트 사용 기준은 1000점입니다.
+2024-12-17 15:49:35,602 [__main__] [INFO] :: Processing Time: 0.0534 seconds
+2024-12-17 15:49:43,006 [__main__] [INFO] :: Received message: 쿠폰 쓰려면 어떻게 해야 돼
+2024-12-17 15:49:43,025 [__main__] [INFO] :: Intent ID: 17
+2024-12-17 15:49:43,054 [__main__] [INFO] :: Response: 홍콩반점0410 구리돌다리점에서 스탬프 10개 적립을 통해 쿠폰 혜택을 누릴 수 있습니다.
+2024-12-17 15:49:43,054 [__main__] [INFO] :: Processing Time: 0.0485 seconds
+2024-12-17 15:49:49,111 [__main__] [INFO] :: Received message: 사장님이랑 전화 가능해
+2024-12-17 15:49:49,132 [__main__] [INFO] :: Intent ID: 19
+2024-12-17 15:49:49,156 [__main__] [INFO] :: Response: 해당 문의는 문자로 추가 안내드리겠습니다.
+2024-12-17 15:49:49,156 [__main__] [INFO] :: Processing Time: 0.0453 seconds
+2024-12-17 15:49:59,272 [__main__] [INFO] :: Received message: 좌석이 얼마나 돼
+2024-12-17 15:49:59,294 [__main__] [INFO] :: Intent ID: 13
+2024-12-17 15:49:59,320 [__main__] [INFO] :: Response: 문의 내용을 확인하고 문자로 답변드리겠습니다.
+2024-12-17 15:49:59,320 [__main__] [INFO] :: Processing Time: 0.0479 seconds
+2024-12-17 15:50:02,605 [__main__] [INFO] :: Received message: 빈자리 있어
+2024-12-17 15:50:02,628 [__main__] [INFO] :: Intent ID: 20
+2024-12-17 15:50:02,654 [__main__] [INFO] :: Response: 해당 문의는 문자로 추가 안내드리겠습니다.
+2024-12-17 15:50:02,654 [__main__] [INFO] :: Processing Time: 0.0496 seconds
+2024-12-17 15:50:06,905 [__main__] [INFO] :: Received message: 대기열이 있니
+2024-12-17 15:50:06,928 [__main__] [INFO] :: Intent ID: 11
+2024-12-17 15:50:06,954 [__main__] [INFO] :: Response: 문의 확인 후 전화드리겠습니다.
+2024-12-17 15:50:06,954 [__main__] [INFO] :: Processing Time: 0.0492 seconds
+2024-12-17 15:50:10,862 [__main__] [INFO] :: Received message: 이벤트 진행 중인 거 어떤 거 있어
+2024-12-17 15:50:10,888 [__main__] [INFO] :: Intent ID: 18
+2024-12-17 15:50:10,920 [__main__] [INFO] :: Response: 고추짜장 500원 할인은 2024년 8월 31일부터 2025년 1월 31일까지 홍콩반점0410 구리돌다리점에서 참여 가능합니다.
+2024-12-17 15:50:10,920 [__main__] [INFO] :: Processing Time: 0.0581 seconds
+2024-12-17 15:50:16,172 [__main__] [INFO] :: Received message: 프로모션 메뉴 뭐 있어
+2024-12-17 15:50:16,195 [__main__] [INFO] :: Intent ID: 2
+2024-12-17 15:50:16,225 [__main__] [INFO] :: Response: 저희 홍콩반점0410 구리돌다리점에서는 15주년행사 짬뽕 메뉴를 이벤트, 한정 이벤트중입니다.
+2024-12-17 15:50:16,226 [__main__] [INFO] :: Processing Time: 0.0539 seconds

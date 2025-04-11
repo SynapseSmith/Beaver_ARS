@@ -1,0 +1,5 @@
+﻿2024-12-29 22:54:07,461 [__main__] [INFO] :: *** 22h-54m-07s START ***
+2024-12-29 22:54:07,461 [__main__] [INFO] :: *** PID: 1993315 ***
+2024-12-29 22:54:31,733 [__main__] [INFO] :: Received message: 아메리카노 있어?
+2024-12-29 22:54:31,763 [__main__] [INFO] :: Intent ID: 1
+2024-12-29 22:54:31,925 [__main__] [ERROR] :: Error: cannot unpack non-iterable Response object

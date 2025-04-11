@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>홍콩반점 강남점 ARS</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+        }
+
+        #title-container {
+            width: 100%;
+            text-align: center;
+            padding: 20px 0;
+            position: absolute;
+            top: 150px;
+            background-color: #f4f4f4;
+            z-index: 10;
+        }
+
+        #container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100%;
+            margin-top: 100px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 30px;
+        }
+
+        button {
+            padding: 20px 40px;
+            font-size: 20px;
+            cursor: pointer;
+            border-radius: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #response {
+            margin-top: 20px;
+            font-size: 18px;
+            white-space: pre-wrap; /* 줄바꿈을 유지하도록 설정 */
+        }
+
+        #consult-gif {
+            display: none;
+            width: 350px;
+            height: auto;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 타이틀을 고정된 위치에 유지 -->
+    <div id="title-container">
+        <h1>홍콩반점 강남점 ARS</h1>
+    </div>
+
+    <!-- 컨텐츠 중앙 정렬 -->
+    <div id="container">
+        <button id="start-btn">상담 시작하기</button>
+        <img id="consult-gif" src="/static/images/상담.gif" alt="상담 GIF">
+        <div id="response"></div>
+    </div>
+
+    <!-- Socket.IO 라이브러리 로드 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.js"></script>
+    <script>
+        const responseDiv = document.getElementById('response');
+        const startBtn = document.getElementById('start-btn');
+        const consultGif = document.getElementById('consult-gif');
+        let socket;
+
+        let speechQueue = []; // 음성 큐
+        let isSpeaking = false; // 현재 음성 출력 여부
+
+        // TTS 음성 출력 함수 (Promise 기반)
+        function speakText(text) {
+            return new Promise((resolve, reject) => {
+                if (!text) {
+                    resolve();
+                    return;
+                }
+
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'ko-KR';
+                utterance.rate = 1.5; // 음성 속도 조정 (기본값은 1.0, 1.5로 설정하여 속도 증가)
+
+                utterance.onend = () => {
+                    resolve();
+                };
+
+                utterance.onerror = (e) => {
+                    console.error('TTS Error:', e);
+                    reject(e);
+                };
+
+                window.speechSynthesis.speak(utterance);
+            });
+        }
+
+        // 비동기적으로 음성 큐를 처리하는 함수
+        async function processSpeechQueue() {
+            if (isSpeaking) return;
+            if (speechQueue.length === 0) return;
+
+            isSpeaking = true;
+            const text = speechQueue.shift();
+            try {
+                await speakText(text);
+            } catch (e) {
+                console.error('Speech Synthesis Failed:', e);
+            }
+            isSpeaking = false;
+            processSpeechQueue(); // 다음 큐 처리
+        }
+
+        // 페이지 로드 시 WebSocket 연결 설정
+        window.addEventListener('DOMContentLoaded', () => {
+            socket = io.connect('http://localhost:5001');  // 웹 서버의 WebSocket 연결
+
+            socket.on('message', (data) => {
+                const token = data.token;
+
+                if (token === 'END') {
+                    socket.disconnect();
+                    // 남은 큐에 있는 텍스트를 TTS로 실행
+                    processSpeechQueue();
+                } else {
+                    responseDiv.textContent += token + ' ';
+                    speechQueue.push(token + ' '); // 큐에 토큰 추가
+                    processSpeechQueue(); // 큐 처리 시작
+                }
+            });
+
+            socket.on('connect_error', (error) => {
+                console.error('WebSocket 연결 오류:', error);
+            });
+        });
+
+        startBtn.addEventListener('click', () => {
+            startBtn.style.display = 'none';
+            consultGif.style.display = 'block';
+
+            changeGif("상담.gif");
+
+            const initial_text = "안녕?";
+            speakText(initial_text).then(() => {
+                changeGif("음성인식.gif");
+
+                // 서버로 메시지 전송
+                sendToServer("사용자가 서버에 문의를 요청했습니다.");
+            }).catch(e => {
+                console.error('Initial TTS Failed:', e);
+            });
+        });
+
+        function sendToServer(message) {
+            // WebSocket 연결은 이미 설정되었으므로 emit만 수행
+            if (socket && socket.connected) {
+                socket.emit('message', { message: message });
+            } else {
+                console.error('WebSocket 연결이 끊어졌습니다.');
+            }
+        }
+
+        function changeGif(gifFilename) {
+            consultGif.src = `/static/images/${gifFilename}`;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,196 @@
+2024-12-16 14:03:10,904 INFO    StreamThr :1296499 [internal.py:wandb_internal():85] W&B internal server running at pid: 1296499, started at: 2024-12-16 14:03:10.902103
+2024-12-16 14:03:10,907 DEBUG   HandlerThread:1296499 [handler.py:handle_request():158] handle_request: status
+2024-12-16 14:03:10,911 INFO    WriterThread:1296499 [datastore.py:open_for_write():87] open: /nas/beaver/data/shared_files/241215_BERT/wandb/run-20241216_140310-db3v0ggp/run-db3v0ggp.wandb
+2024-12-16 14:03:10,914 DEBUG   SenderThread:1296499 [sender.py:send():379] send: header
+2024-12-16 14:03:10,914 DEBUG   SenderThread:1296499 [sender.py:send():379] send: run
+2024-12-16 14:03:11,476 INFO    SenderThread:1296499 [dir_watcher.py:__init__():211] watching files in: /nas/beaver/data/shared_files/241215_BERT/wandb/run-20241216_140310-db3v0ggp/files
+2024-12-16 14:03:11,477 INFO    SenderThread:1296499 [sender.py:_start_run_threads():1188] run started: db3v0ggp with start time 1734325390.90156
+2024-12-16 14:03:11,491 DEBUG   HandlerThread:1296499 [handler.py:handle_request():158] handle_request: check_version
+2024-12-16 14:03:11,492 DEBUG   SenderThread:1296499 [sender.py:send_request():406] send_request: check_version
+2024-12-16 14:03:11,584 DEBUG   HandlerThread:1296499 [handler.py:handle_request():158] handle_request: run_start
+2024-12-16 14:03:11,621 DEBUG   HandlerThread:1296499 [system_info.py:__init__():26] System info init
+2024-12-16 14:03:11,621 DEBUG   HandlerThread:1296499 [system_info.py:__init__():41] System info init done
+2024-12-16 14:03:11,621 INFO    HandlerThread:1296499 [system_monitor.py:start():194] Starting system monitor
+2024-12-16 14:03:11,621 INFO    SystemMonitor:1296499 [system_monitor.py:_start():158] Starting system asset monitoring threads
+2024-12-16 14:03:11,621 INFO    HandlerThread:1296499 [system_monitor.py:probe():214] Collecting system info
+2024-12-16 14:03:11,622 INFO    SystemMonitor:1296499 [interfaces.py:start():188] Started cpu monitoring
+2024-12-16 14:03:11,624 INFO    SystemMonitor:1296499 [interfaces.py:start():188] Started disk monitoring
+2024-12-16 14:03:11,626 INFO    SystemMonitor:1296499 [interfaces.py:start():188] Started gpu monitoring
+2024-12-16 14:03:11,628 INFO    SystemMonitor:1296499 [interfaces.py:start():188] Started memory monitoring
+2024-12-16 14:03:11,630 INFO    SystemMonitor:1296499 [interfaces.py:start():188] Started network monitoring
+2024-12-16 14:03:11,676 DEBUG   HandlerThread:1296499 [system_info.py:probe():152] Probing system
+2024-12-16 14:03:11,680 DEBUG   HandlerThread:1296499 [gitlib.py:_init_repo():56] git repository is invalid
+2024-12-16 14:03:11,681 DEBUG   HandlerThread:1296499 [system_info.py:probe():200] Probing system done
+2024-12-16 14:03:11,681 DEBUG   HandlerThread:1296499 [system_monitor.py:probe():223] {'os': 'Linux-5.15.0-117-generic-x86_64-with-glibc2.31', 'python': '3.10.14', 'heartbeatAt': '2024-12-16T05:03:11.677095', 'startedAt': '2024-12-16T05:03:10.884563', 'docker': None, 'cuda': None, 'args': (), 'state': 'running', 'program': '/home/user09/beaver/data/shared_files/241215_BERT/241215_step1_evaluation_cls_intent.py', 'codePathLocal': None, 'host': 'ubuntu', 'username': 'user09', 'executable': '/home/user09/venv/beaver/bin/python', 'cpu_count': 32, 'cpu_count_logical': 64, 'cpu_freq': {'current': 1180.608609375, 'min': 800.0, 'max': 3500.0}, 'cpu_freq_per_core': [{'current': 900.0, 'min': 800.0, 'max': 3500.0}, {'current': 900.0, 'min': 800.0, 'max': 3500.0}, {'current': 800.0, 'min': 800.0, 'max': 3500.0}, {'current': 800.0, 'min': 800.0, 'max': 3500.0}, {'current': 800.0, 'min': 800.0, 'max': 3500.0}, {'current': 900.0, 'min': 800.0, 'max': 3500.0}, {'current': 900.0, 'min': 800.0, 'max': 3500.0}, {'current': 1800.0, 'min': 800.0, 'max': 3500.0}, {'current': 800.0, 'min': 800.0, 'max': 3500.0}, {'current': 900.0, 'min': 800.0, 'max': 3500.0}, {'current': 900.0, 'min': 800.0, 'max': 3500.0}, {'current': 800.0, 'min': 800.0, 'max': 3500.0}, {'current': 800.0, 'min': 800.0, 'max': 3500.0}, {'current': 800.0, 'min': 800.0, 'max': 3500.0}, {'current': 1000.0, 'min': 800.0, 'max': 3500.0}, {'current': 800.0, 'min': 800.0, 'max': 3500.0}, {'current': 800.0, 'min': 800.0, 'max': 3500.0}, {'current': 800.0, 'min': 800.0, 'max': 3500.0}, {'current': 2201.959, 'min': 800.0, 'max': 3500.0}, {'current': 3500.0, 'min': 800.0, 'max': 3500.0}, {'current': 800.0, 'min': 800.0, 'max': 3500.0}, {'current': 800.0, 'min': 800.0, 'max': 3500.0}, {'current': 800.0, 'min': 800.0, 'max': 3500.0}, {'current': 800.0, 'min': 800.0, 'max': 3500.0}, {'current': 800.0, 'min': 800.0, 'max': 3500.0}, {'current': 800.0, 'min': 800.0, 'max': 3500.0}, {'current': 800.0, 'min': 800.0, 'max': 3500.0}, {'current': 800.0, 'min': 800.0, 'max': 3500.0}, {'current': 800.0, 'min': 800.0, 'max': 3500.0}, {'current': 800.0, 'min': 800.0, 'max': 3500.0}, {'current': 800.0, 'min': 800.0, 'max': 3500.0}, {'current': 1626.936, 'min': 800.0, 'max': 3500.0}, {'current': 800.0, 'min': 800.0, 'max': 3500.0}, {'current': 800.0, 'min': 800.0, 'max': 3500.0}, {'current': 800.0, 'min': 800.0, 'max': 3500.0}, {'current': 800.0, 'min': 800.0, 'max': 3500.0}, {'current': 1100.0, 'min': 800.0, 'max': 3500.0}, {'current': 800.0, 'min': 800.0, 'max': 3500.0}, {'current': 800.0, 'min': 800.0, 'max': 3500.0}, {'current': 800.0, 'min': 800.0, 'max': 3500.0}, {'current': 1200.0, 'min': 800.0, 'max': 3500.0}, {'current': 800.0, 'min': 800.0, 'max': 3500.0}, {'current': 900.0, 'min': 800.0, 'max': 3500.0}, {'current': 800.0, 'min': 800.0, 'max': 3500.0}, {'current': 800.0, 'min': 800.0, 'max': 3500.0}, {'current': 800.0, 'min': 800.0, 'max': 3500.0}, {'current': 800.0, 'min': 800.0, 'max': 3500.0}, {'current': 800.0, 'min': 800.0, 'max': 3500.0}, {'current': 800.0, 'min': 800.0, 'max': 3500.0}, {'current': 3500.0, 'min': 800.0, 'max': 3500.0}, {'current': 800.0, 'min': 800.0, 'max': 3500.0}, {'current': 800.0, 'min': 800.0, 'max': 3500.0}, {'current': 1700.0, 'min': 800.0, 'max': 3500.0}, {'current': 800.0, 'min': 800.0, 'max': 3500.0}, {'current': 3500.0, 'min': 800.0, 'max': 3500.0}, {'current': 3500.0, 'min': 800.0, 'max': 3500.0}, {'current': 800.0, 'min': 800.0, 'max': 3500.0}, {'current': 3500.0, 'min': 800.0, 'max': 3500.0}, {'current': 3500.0, 'min': 800.0, 'max': 3500.0}, {'current': 800.0, 'min': 800.0, 'max': 3500.0}, {'current': 800.0, 'min': 800.0, 'max': 3500.0}, {'current': 800.0, 'min': 800.0, 'max': 3500.0}, {'current': 800.0, 'min': 800.0, 'max': 3500.0}, {'current': 800.0, 'min': 800.0, 'max': 3500.0}], 'disk': {'/': {'total': 426.96863555908203, 'used': 384.7784843444824}}, 'gpu': 'NVIDIA A100 80GB PCIe', 'gpu_count': 3, 'gpu_devices': [{'name': 'NVIDIA A100 80GB PCIe', 'memory_total': 85899345920}, {'name': 'NVIDIA A100 80GB PCIe', 'memory_total': 85899345920}, {'name': 'NVIDIA A100 80GB PCIe', 'memory_total': 85899345920}], 'memory': {'total': 503.5326614379883}}
+2024-12-16 14:03:11,681 INFO    HandlerThread:1296499 [system_monitor.py:probe():224] Finished collecting system info
+2024-12-16 14:03:11,681 INFO    HandlerThread:1296499 [system_monitor.py:probe():227] Publishing system info
+2024-12-16 14:03:11,683 INFO    HandlerThread:1296499 [system_monitor.py:probe():229] Finished publishing system info
+2024-12-16 14:03:11,688 DEBUG   SenderThread:1296499 [sender.py:send():379] send: files
+2024-12-16 14:03:11,689 INFO    SenderThread:1296499 [sender.py:_save_file():1454] saving file wandb-metadata.json with policy now
+2024-12-16 14:03:11,931 DEBUG   HandlerThread:1296499 [handler.py:handle_request():158] handle_request: python_packages
+2024-12-16 14:03:11,931 DEBUG   SenderThread:1296499 [sender.py:send_request():406] send_request: python_packages
+2024-12-16 14:03:11,933 DEBUG   HandlerThread:1296499 [handler.py:handle_request():158] handle_request: stop_status
+2024-12-16 14:03:11,935 DEBUG   HandlerThread:1296499 [handler.py:handle_request():158] handle_request: internal_messages
+2024-12-16 14:03:11,936 DEBUG   SenderThread:1296499 [sender.py:send_request():406] send_request: stop_status
+2024-12-16 14:03:11,982 DEBUG   HandlerThread:1296499 [handler.py:handle_request():158] handle_request: partial_history
+2024-12-16 14:03:12,226 DEBUG   SenderThread:1296499 [sender.py:send():379] send: telemetry
+2024-12-16 14:03:12,226 DEBUG   SenderThread:1296499 [sender.py:send():379] send: config
+2024-12-16 14:03:12,228 DEBUG   SenderThread:1296499 [sender.py:send():379] send: telemetry
+2024-12-16 14:03:12,228 DEBUG   SenderThread:1296499 [sender.py:send():379] send: metric
+2024-12-16 14:03:12,229 DEBUG   SenderThread:1296499 [sender.py:send():379] send: telemetry
+2024-12-16 14:03:12,229 DEBUG   SenderThread:1296499 [sender.py:send():379] send: metric
+2024-12-16 14:03:12,229 WARNING SenderThread:1296499 [sender.py:send_metric():1405] Seen metric with glob (shouldn't happen)
+2024-12-16 14:03:12,229 DEBUG   SenderThread:1296499 [sender.py:send():379] send: telemetry
+2024-12-16 14:03:12,229 DEBUG   SenderThread:1296499 [sender.py:send():379] send: telemetry
+2024-12-16 14:03:12,229 DEBUG   SenderThread:1296499 [sender.py:send():379] send: config
+2024-12-16 14:03:12,230 DEBUG   SenderThread:1296499 [sender.py:send():379] send: metric
+2024-12-16 14:03:12,230 DEBUG   SenderThread:1296499 [sender.py:send():379] send: metric
+2024-12-16 14:03:12,230 DEBUG   SenderThread:1296499 [sender.py:send():379] send: metric
+2024-12-16 14:03:12,230 DEBUG   SenderThread:1296499 [sender.py:send():379] send: metric
+2024-12-16 14:03:12,230 DEBUG   SenderThread:1296499 [sender.py:send():379] send: metric
+2024-12-16 14:03:12,230 DEBUG   SenderThread:1296499 [sender.py:send():379] send: metric
+2024-12-16 14:03:12,231 DEBUG   SenderThread:1296499 [sender.py:send():379] send: metric
+2024-12-16 14:03:12,231 DEBUG   SenderThread:1296499 [sender.py:send():379] send: history
+2024-12-16 14:03:12,231 DEBUG   SenderThread:1296499 [sender.py:send_request():406] send_request: summary_record
+2024-12-16 14:03:12,234 INFO    SenderThread:1296499 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-12-16 14:03:12,235 DEBUG   SenderThread:1296499 [sender.py:send():379] send: exit
+2024-12-16 14:03:12,236 INFO    SenderThread:1296499 [sender.py:send_exit():586] handling exit code: 0
+2024-12-16 14:03:12,236 INFO    SenderThread:1296499 [sender.py:send_exit():588] handling runtime: 0
+2024-12-16 14:03:12,237 INFO    SenderThread:1296499 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-12-16 14:03:12,237 INFO    SenderThread:1296499 [sender.py:send_exit():594] send defer
+2024-12-16 14:03:12,237 DEBUG   HandlerThread:1296499 [handler.py:handle_request():158] handle_request: defer
+2024-12-16 14:03:12,238 INFO    HandlerThread:1296499 [handler.py:handle_request_defer():184] handle defer: 0
+2024-12-16 14:03:12,238 DEBUG   SenderThread:1296499 [sender.py:send_request():406] send_request: defer
+2024-12-16 14:03:12,238 INFO    SenderThread:1296499 [sender.py:send_request_defer():610] handle sender defer: 0
+2024-12-16 14:03:12,238 INFO    SenderThread:1296499 [sender.py:transition_state():614] send defer: 1
+2024-12-16 14:03:12,239 DEBUG   HandlerThread:1296499 [handler.py:handle_request():158] handle_request: defer
+2024-12-16 14:03:12,239 INFO    HandlerThread:1296499 [handler.py:handle_request_defer():184] handle defer: 1
+2024-12-16 14:03:12,239 DEBUG   SenderThread:1296499 [sender.py:send_request():406] send_request: defer
+2024-12-16 14:03:12,239 INFO    SenderThread:1296499 [sender.py:send_request_defer():610] handle sender defer: 1
+2024-12-16 14:03:12,239 INFO    SenderThread:1296499 [sender.py:transition_state():614] send defer: 2
+2024-12-16 14:03:12,240 DEBUG   HandlerThread:1296499 [handler.py:handle_request():158] handle_request: defer
+2024-12-16 14:03:12,240 INFO    HandlerThread:1296499 [handler.py:handle_request_defer():184] handle defer: 2
+2024-12-16 14:03:12,240 INFO    HandlerThread:1296499 [system_monitor.py:finish():203] Stopping system monitor
+2024-12-16 14:03:12,240 DEBUG   SystemMonitor:1296499 [system_monitor.py:_start():172] Starting system metrics aggregation loop
+2024-12-16 14:03:12,241 DEBUG   SystemMonitor:1296499 [system_monitor.py:_start():179] Finished system metrics aggregation loop
+2024-12-16 14:03:12,242 INFO    HandlerThread:1296499 [interfaces.py:finish():200] Joined cpu monitor
+2024-12-16 14:03:12,242 DEBUG   SystemMonitor:1296499 [system_monitor.py:_start():183] Publishing last batch of metrics
+2024-12-16 14:03:12,242 INFO    HandlerThread:1296499 [interfaces.py:finish():200] Joined disk monitor
+2024-12-16 14:03:12,476 INFO    wandb-upload_0:1296499 [upload_job.py:push():130] Uploaded file /tmp/tmpzpj70k2hwandb/6wk18urz-wandb-metadata.json
+2024-12-16 14:03:12,480 INFO    Thread-12 :1296499 [dir_watcher.py:_on_file_created():271] file/dir created: /nas/beaver/data/shared_files/241215_BERT/wandb/run-20241216_140310-db3v0ggp/files/requirements.txt
+2024-12-16 14:03:12,481 INFO    Thread-12 :1296499 [dir_watcher.py:_on_file_created():271] file/dir created: /nas/beaver/data/shared_files/241215_BERT/wandb/run-20241216_140310-db3v0ggp/files/wandb-summary.json
+2024-12-16 14:03:12,481 INFO    Thread-12 :1296499 [dir_watcher.py:_on_file_created():271] file/dir created: /nas/beaver/data/shared_files/241215_BERT/wandb/run-20241216_140310-db3v0ggp/files/output.log
+2024-12-16 14:03:12,481 INFO    Thread-12 :1296499 [dir_watcher.py:_on_file_created():271] file/dir created: /nas/beaver/data/shared_files/241215_BERT/wandb/run-20241216_140310-db3v0ggp/files/wandb-metadata.json
+2024-12-16 14:03:12,505 INFO    HandlerThread:1296499 [interfaces.py:finish():200] Joined gpu monitor
+2024-12-16 14:03:12,505 INFO    HandlerThread:1296499 [interfaces.py:finish():200] Joined memory monitor
+2024-12-16 14:03:12,506 INFO    HandlerThread:1296499 [interfaces.py:finish():200] Joined network monitor
+2024-12-16 14:03:12,507 DEBUG   SenderThread:1296499 [sender.py:send_request():406] send_request: defer
+2024-12-16 14:03:12,507 INFO    SenderThread:1296499 [sender.py:send_request_defer():610] handle sender defer: 2
+2024-12-16 14:03:12,507 INFO    SenderThread:1296499 [sender.py:transition_state():614] send defer: 3
+2024-12-16 14:03:12,507 DEBUG   SenderThread:1296499 [sender.py:send():379] send: stats
+2024-12-16 14:03:12,509 DEBUG   HandlerThread:1296499 [handler.py:handle_request():158] handle_request: defer
+2024-12-16 14:03:12,509 INFO    HandlerThread:1296499 [handler.py:handle_request_defer():184] handle defer: 3
+2024-12-16 14:03:12,509 DEBUG   SenderThread:1296499 [sender.py:send_request():406] send_request: defer
+2024-12-16 14:03:12,510 INFO    SenderThread:1296499 [sender.py:send_request_defer():610] handle sender defer: 3
+2024-12-16 14:03:12,510 INFO    SenderThread:1296499 [sender.py:transition_state():614] send defer: 4
+2024-12-16 14:03:12,510 DEBUG   HandlerThread:1296499 [handler.py:handle_request():158] handle_request: defer
+2024-12-16 14:03:12,510 INFO    HandlerThread:1296499 [handler.py:handle_request_defer():184] handle defer: 4
+2024-12-16 14:03:12,511 DEBUG   SenderThread:1296499 [sender.py:send_request():406] send_request: defer
+2024-12-16 14:03:12,511 INFO    SenderThread:1296499 [sender.py:send_request_defer():610] handle sender defer: 4
+2024-12-16 14:03:12,511 INFO    SenderThread:1296499 [sender.py:transition_state():614] send defer: 5
+2024-12-16 14:03:12,511 DEBUG   HandlerThread:1296499 [handler.py:handle_request():158] handle_request: defer
+2024-12-16 14:03:12,511 INFO    HandlerThread:1296499 [handler.py:handle_request_defer():184] handle defer: 5
+2024-12-16 14:03:12,512 DEBUG   SenderThread:1296499 [sender.py:send():379] send: summary
+2024-12-16 14:03:12,515 INFO    SenderThread:1296499 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-12-16 14:03:12,515 DEBUG   SenderThread:1296499 [sender.py:send_request():406] send_request: defer
+2024-12-16 14:03:12,515 INFO    SenderThread:1296499 [sender.py:send_request_defer():610] handle sender defer: 5
+2024-12-16 14:03:12,515 INFO    SenderThread:1296499 [sender.py:transition_state():614] send defer: 6
+2024-12-16 14:03:12,515 DEBUG   HandlerThread:1296499 [handler.py:handle_request():158] handle_request: defer
+2024-12-16 14:03:12,515 INFO    HandlerThread:1296499 [handler.py:handle_request_defer():184] handle defer: 6
+2024-12-16 14:03:12,516 DEBUG   SenderThread:1296499 [sender.py:send_request():406] send_request: defer
+2024-12-16 14:03:12,516 INFO    SenderThread:1296499 [sender.py:send_request_defer():610] handle sender defer: 6
+2024-12-16 14:03:12,520 DEBUG   HandlerThread:1296499 [handler.py:handle_request():158] handle_request: status_report
+2024-12-16 14:03:12,788 INFO    SenderThread:1296499 [sender.py:transition_state():614] send defer: 7
+2024-12-16 14:03:12,788 DEBUG   HandlerThread:1296499 [handler.py:handle_request():158] handle_request: defer
+2024-12-16 14:03:12,788 INFO    HandlerThread:1296499 [handler.py:handle_request_defer():184] handle defer: 7
+2024-12-16 14:03:12,789 DEBUG   SenderThread:1296499 [sender.py:send_request():406] send_request: defer
+2024-12-16 14:03:12,789 INFO    SenderThread:1296499 [sender.py:send_request_defer():610] handle sender defer: 7
+2024-12-16 14:03:12,988 DEBUG   HandlerThread:1296499 [handler.py:handle_request():158] handle_request: poll_exit
+2024-12-16 14:03:13,481 INFO    Thread-12 :1296499 [dir_watcher.py:_on_file_modified():288] file/dir modified: /nas/beaver/data/shared_files/241215_BERT/wandb/run-20241216_140310-db3v0ggp/files/wandb-summary.json
+2024-12-16 14:03:13,481 INFO    Thread-12 :1296499 [dir_watcher.py:_on_file_modified():288] file/dir modified: /nas/beaver/data/shared_files/241215_BERT/wandb/run-20241216_140310-db3v0ggp/files/config.yaml
+2024-12-16 14:03:14,243 INFO    SenderThread:1296499 [sender.py:transition_state():614] send defer: 8
+2024-12-16 14:03:14,244 DEBUG   SenderThread:1296499 [sender.py:send_request():406] send_request: poll_exit
+2024-12-16 14:03:14,244 DEBUG   HandlerThread:1296499 [handler.py:handle_request():158] handle_request: defer
+2024-12-16 14:03:14,245 INFO    HandlerThread:1296499 [handler.py:handle_request_defer():184] handle defer: 8
+2024-12-16 14:03:14,245 DEBUG   SenderThread:1296499 [sender.py:send_request():406] send_request: defer
+2024-12-16 14:03:14,245 INFO    SenderThread:1296499 [sender.py:send_request_defer():610] handle sender defer: 8
+2024-12-16 14:03:14,246 INFO    SenderThread:1296499 [job_builder.py:build():440] Attempting to build job artifact
+2024-12-16 14:03:14,248 INFO    SenderThread:1296499 [job_builder.py:_get_source_type():580] no source found
+2024-12-16 14:03:14,248 INFO    SenderThread:1296499 [sender.py:transition_state():614] send defer: 9
+2024-12-16 14:03:14,248 DEBUG   HandlerThread:1296499 [handler.py:handle_request():158] handle_request: defer
+2024-12-16 14:03:14,248 INFO    HandlerThread:1296499 [handler.py:handle_request_defer():184] handle defer: 9
+2024-12-16 14:03:14,248 DEBUG   SenderThread:1296499 [sender.py:send_request():406] send_request: defer
+2024-12-16 14:03:14,249 INFO    SenderThread:1296499 [sender.py:send_request_defer():610] handle sender defer: 9
+2024-12-16 14:03:14,249 INFO    SenderThread:1296499 [dir_watcher.py:finish():358] shutting down directory watcher
+2024-12-16 14:03:14,482 INFO    Thread-12 :1296499 [dir_watcher.py:_on_file_modified():288] file/dir modified: /nas/beaver/data/shared_files/241215_BERT/wandb/run-20241216_140310-db3v0ggp/files/output.log
+2024-12-16 14:03:14,484 INFO    SenderThread:1296499 [dir_watcher.py:finish():388] scan: /nas/beaver/data/shared_files/241215_BERT/wandb/run-20241216_140310-db3v0ggp/files
+2024-12-16 14:03:14,485 INFO    SenderThread:1296499 [dir_watcher.py:finish():402] scan save: /nas/beaver/data/shared_files/241215_BERT/wandb/run-20241216_140310-db3v0ggp/files/config.yaml config.yaml
+2024-12-16 14:03:14,485 INFO    SenderThread:1296499 [dir_watcher.py:finish():402] scan save: /nas/beaver/data/shared_files/241215_BERT/wandb/run-20241216_140310-db3v0ggp/files/wandb-metadata.json wandb-metadata.json
+2024-12-16 14:03:14,486 INFO    SenderThread:1296499 [dir_watcher.py:finish():402] scan save: /nas/beaver/data/shared_files/241215_BERT/wandb/run-20241216_140310-db3v0ggp/files/requirements.txt requirements.txt
+2024-12-16 14:03:14,486 INFO    SenderThread:1296499 [dir_watcher.py:finish():402] scan save: /nas/beaver/data/shared_files/241215_BERT/wandb/run-20241216_140310-db3v0ggp/files/wandb-summary.json wandb-summary.json
+2024-12-16 14:03:14,486 INFO    SenderThread:1296499 [dir_watcher.py:finish():402] scan save: /nas/beaver/data/shared_files/241215_BERT/wandb/run-20241216_140310-db3v0ggp/files/output.log output.log
+2024-12-16 14:03:14,486 INFO    SenderThread:1296499 [sender.py:transition_state():614] send defer: 10
+2024-12-16 14:03:14,487 DEBUG   HandlerThread:1296499 [handler.py:handle_request():158] handle_request: defer
+2024-12-16 14:03:14,487 INFO    HandlerThread:1296499 [handler.py:handle_request_defer():184] handle defer: 10
+2024-12-16 14:03:14,487 DEBUG   SenderThread:1296499 [sender.py:send_request():406] send_request: defer
+2024-12-16 14:03:14,493 INFO    SenderThread:1296499 [sender.py:send_request_defer():610] handle sender defer: 10
+2024-12-16 14:03:14,494 INFO    SenderThread:1296499 [file_pusher.py:finish():169] shutting down file pusher
+2024-12-16 14:03:14,990 DEBUG   HandlerThread:1296499 [handler.py:handle_request():158] handle_request: poll_exit
+2024-12-16 14:03:14,991 DEBUG   SenderThread:1296499 [sender.py:send_request():406] send_request: poll_exit
+2024-12-16 14:03:15,030 INFO    wandb-upload_0:1296499 [upload_job.py:push():130] Uploaded file /nas/beaver/data/shared_files/241215_BERT/wandb/run-20241216_140310-db3v0ggp/files/requirements.txt
+2024-12-16 14:03:15,051 INFO    wandb-upload_1:1296499 [upload_job.py:push():130] Uploaded file /nas/beaver/data/shared_files/241215_BERT/wandb/run-20241216_140310-db3v0ggp/files/config.yaml
+2024-12-16 14:03:15,054 INFO    wandb-upload_2:1296499 [upload_job.py:push():130] Uploaded file /nas/beaver/data/shared_files/241215_BERT/wandb/run-20241216_140310-db3v0ggp/files/wandb-summary.json
+2024-12-16 14:03:15,056 INFO    wandb-upload_3:1296499 [upload_job.py:push():130] Uploaded file /nas/beaver/data/shared_files/241215_BERT/wandb/run-20241216_140310-db3v0ggp/files/output.log
+2024-12-16 14:03:15,256 INFO    Thread-11 (_thread_body):1296499 [sender.py:transition_state():614] send defer: 11
+2024-12-16 14:03:15,257 DEBUG   HandlerThread:1296499 [handler.py:handle_request():158] handle_request: defer
+2024-12-16 14:03:15,257 INFO    HandlerThread:1296499 [handler.py:handle_request_defer():184] handle defer: 11
+2024-12-16 14:03:15,258 DEBUG   SenderThread:1296499 [sender.py:send_request():406] send_request: defer
+2024-12-16 14:03:15,258 INFO    SenderThread:1296499 [sender.py:send_request_defer():610] handle sender defer: 11
+2024-12-16 14:03:15,258 INFO    SenderThread:1296499 [file_pusher.py:join():175] waiting for file pusher
+2024-12-16 14:03:15,259 INFO    SenderThread:1296499 [sender.py:transition_state():614] send defer: 12
+2024-12-16 14:03:15,259 DEBUG   HandlerThread:1296499 [handler.py:handle_request():158] handle_request: defer
+2024-12-16 14:03:15,260 INFO    HandlerThread:1296499 [handler.py:handle_request_defer():184] handle defer: 12
+2024-12-16 14:03:15,260 DEBUG   SenderThread:1296499 [sender.py:send_request():406] send_request: defer
+2024-12-16 14:03:15,260 INFO    SenderThread:1296499 [sender.py:send_request_defer():610] handle sender defer: 12
+2024-12-16 14:03:15,261 INFO    SenderThread:1296499 [file_stream.py:finish():601] file stream finish called
+2024-12-16 14:03:15,475 INFO    SenderThread:1296499 [file_stream.py:finish():605] file stream finish is done
+2024-12-16 14:03:15,475 INFO    SenderThread:1296499 [sender.py:transition_state():614] send defer: 13
+2024-12-16 14:03:15,476 DEBUG   HandlerThread:1296499 [handler.py:handle_request():158] handle_request: defer
+2024-12-16 14:03:15,476 INFO    HandlerThread:1296499 [handler.py:handle_request_defer():184] handle defer: 13
+2024-12-16 14:03:15,476 DEBUG   SenderThread:1296499 [sender.py:send_request():406] send_request: defer
+2024-12-16 14:03:15,477 INFO    SenderThread:1296499 [sender.py:send_request_defer():610] handle sender defer: 13
+2024-12-16 14:03:15,477 INFO    SenderThread:1296499 [sender.py:transition_state():614] send defer: 14
+2024-12-16 14:03:15,478 DEBUG   HandlerThread:1296499 [handler.py:handle_request():158] handle_request: defer
+2024-12-16 14:03:15,478 INFO    HandlerThread:1296499 [handler.py:handle_request_defer():184] handle defer: 14
+2024-12-16 14:03:15,478 DEBUG   SenderThread:1296499 [sender.py:send():379] send: final
+2024-12-16 14:03:15,478 DEBUG   SenderThread:1296499 [sender.py:send():379] send: footer
+2024-12-16 14:03:15,479 DEBUG   SenderThread:1296499 [sender.py:send_request():406] send_request: defer
+2024-12-16 14:03:15,479 INFO    SenderThread:1296499 [sender.py:send_request_defer():610] handle sender defer: 14
+2024-12-16 14:03:15,480 DEBUG   HandlerThread:1296499 [handler.py:handle_request():158] handle_request: poll_exit
+2024-12-16 14:03:15,481 DEBUG   HandlerThread:1296499 [handler.py:handle_request():158] handle_request: server_info
+2024-12-16 14:03:15,481 DEBUG   HandlerThread:1296499 [handler.py:handle_request():158] handle_request: poll_exit
+2024-12-16 14:03:15,482 DEBUG   HandlerThread:1296499 [handler.py:handle_request():158] handle_request: get_summary
+2024-12-16 14:03:15,483 DEBUG   HandlerThread:1296499 [handler.py:handle_request():158] handle_request: sampled_history
+2024-12-16 14:03:15,484 DEBUG   SenderThread:1296499 [sender.py:send_request():406] send_request: poll_exit
+2024-12-16 14:03:15,484 DEBUG   HandlerThread:1296499 [handler.py:handle_request():158] handle_request: internal_messages
+2024-12-16 14:03:15,485 DEBUG   SenderThread:1296499 [sender.py:send_request():406] send_request: server_info
+2024-12-16 14:03:15,675 DEBUG   SenderThread:1296499 [sender.py:send_request():406] send_request: poll_exit
+2024-12-16 14:03:15,676 INFO    MainThread:1296499 [wandb_run.py:_footer_history_summary_info():3991] rendering history
+2024-12-16 14:03:15,677 INFO    MainThread:1296499 [wandb_run.py:_footer_history_summary_info():4023] rendering summary
+2024-12-16 14:03:15,677 INFO    MainThread:1296499 [wandb_run.py:_footer_sync_info():3950] logging synced files
+2024-12-16 14:03:15,678 DEBUG   HandlerThread:1296499 [handler.py:handle_request():158] handle_request: shutdown
+2024-12-16 14:03:15,678 INFO    HandlerThread:1296499 [handler.py:finish():882] shutting down handler
+2024-12-16 14:03:16,482 INFO    WriterThread:1296499 [datastore.py:close():296] close: /nas/beaver/data/shared_files/241215_BERT/wandb/run-20241216_140310-db3v0ggp/run-db3v0ggp.wandb
+2024-12-16 14:03:16,676 INFO    SenderThread:1296499 [sender.py:finish():1608] shutting down sender
+2024-12-16 14:03:16,676 INFO    SenderThread:1296499 [file_pusher.py:finish():169] shutting down file pusher
+2024-12-16 14:03:16,676 INFO    SenderThread:1296499 [file_pusher.py:join():175] waiting for file pusher

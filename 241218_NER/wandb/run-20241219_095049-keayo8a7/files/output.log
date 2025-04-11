@@ -1,0 +1,23 @@
+The following columns in the test set don't have a corresponding argument in `RobertaForTokenClassification.forward` and have been ignored: encoded_labels, __index_level_0__, tokens. If encoded_labels, __index_level_0__, tokens are not expected by `RobertaForTokenClassification.forward`,  you can safely ignore this message.
+***** Running Prediction *****
+  Num examples = 68
+  Batch size = 16
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 5/5 [00:00<00:00, 16.31it/s]
+Traceback (most recent call last):
+  File "/home/user09/beaver/data/shared_files/241218_NER/241218_step2_ner_evaluation.py", line 176, in <module>
+    actual = [id_to_label[l] for l in example["labels"] if l != -100]
+  File "/home/user09/beaver/data/shared_files/241218_NER/241218_step2_ner_evaluation.py", line 176, in <listcomp>
+    actual = [id_to_label[l] for l in example["labels"] if l != -100]
+KeyError: tensor(1)
+Evaluation Results:
+F1 Score: 0.9774
+Precision: 0.9701
+Recall: 0.9848
+Classification Report:
+              precision    recall  f1-score   support
+         DAY       1.00      1.00      1.00        17
+        MENU       0.95      0.98      0.96        41
+     PAYMENT       1.00      1.00      1.00         8
+   micro avg       0.97      0.98      0.98        66
+   macro avg       0.98      0.99      0.99        66
+weighted avg       0.97      0.98      0.98        66

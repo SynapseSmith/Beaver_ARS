@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>인공지능 ARS (Barge-in Enabled)</title>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0; padding: 0;
+            background-color: #f4f4f4;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: flex-start;
+            height: 100vh;
+        }
+        #title-container {
+            width: 100%; text-align: center; padding: 20px 0;
+            position: absolute; top: 150px; background-color: #f4f4f4;
+            z-index: 10;
+        }
+        #container {
+            display: flex; justify-content: center; align-items: center;
+            flex-direction: column; height: 100%; margin-top: 100px;
+        }
+        h1 { margin: 0; font-size: 30px; }
+        button {
+            padding: 20px 40px; font-size: 20px; cursor: pointer;
+            border-radius: 10px; background-color: #007BFF; color: white; border: none;
+            transition: background-color 0.3s;
+        }
+        button:hover { background-color: #0056b3; }
+        #response { margin-top: 20px; font-size: 18px; }
+        #consult-gif {
+            display: none; width: 350px; height: auto; margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="title-container">
+        <h1>인공지능 ARS (Barge-in)</h1>
+    </div>
+
+    <div id="container">
+        <!-- 1단계: 마이크 권한 허용 버튼 -->
+        <button id="permission-btn">마이크 권한 허용</button>
+        <!-- 2단계: 상담 시작하기 버튼 (초기에는 숨김) -->
+        <button id="start-btn" style="display:none;">상담 시작하기</button>
+
+        <img id="consult-gif" src="{{ url_for('static', filename='images/상담.gif') }}">
+        <div id="response"></div>
+    </div>
+
+    <!-- AWS SDK -->
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.410.0.min.js"></script>
+    <script type="text/javascript">
+        AWS.config.region = 'ap-northeast-2';
+        AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+            IdentityPoolId: 'ap-northeast-2:bf5fce7d-c4a9-45c8-82e4-caa69740769a'
+        });
+
+        const responseDiv = document.getElementById('response');
+        const permBtn = document.getElementById('permission-btn');
+        const startBtn = document.getElementById('start-btn');
+        const consultGif = document.getElementById('consult-gif');
+
+        let audio = new Audio();
+
+        // Web Speech API
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        const recognition = new SpeechRecognition();
+        recognition.lang = 'ko-KR';
+        recognition.interimResults = false;
+        recognition.maxAlternatives = 1;
+        recognition.continuous = true; // 동시 동작(바지인) 위해 항상 마이크 On
+
+        // ============================
+        // 1단계: "마이크 권한 허용" 버튼 로직
+        // ============================
+        permBtn.addEventListener('click', () => {
+            // 권한 허용 팝업을 띄우기 위해 'dummy start/stop'
+            responseDiv.textContent = "마이크 권한 요청 중...";
+            recognition.start();  // 브라우저가 마이크 권한 팝업을 띄움
+
+            // 잠시 후 강제로 stop()해서, 권한만 획득하고 인식은 중단
+            setTimeout(() => {
+                recognition.stop();
+            }, 1000); // 1초 정도면 권한 팝업이 뜨고 허용될 수 있음 (환경별로 조정)
+        });
+
+        // 음성 인식이 실제로 시작된 경우(= 권한 허용 버튼으로 성공)
+        recognition.addEventListener('start', () => {
+            console.log("Recognition started (for permission).");
+        });
+
+        // 권한 팝업을 허용 / 거부 / 혹은 timeout 후 인식이 중단되었을 때
+        recognition.addEventListener('end', () => {
+            console.log("Recognition ended (permission flow).");
+
+            // 권한이 허용되었을 가능성이 높으니,
+            // "상담 시작하기" 버튼을 표시하고,
+            // "마이크 권한 허용" 버튼은 숨김 처리
+            permBtn.style.display = 'none';
+            startBtn.style.display = 'inline-block';
+
+            responseDiv.textContent = "마이크 권한이 허용되었습니다. 이제 상담을 시작해보세요!";
+        });
+
+        // 권한 요청 중 발생한 에러 처리
+        recognition.addEventListener('error', (event) => {
+            console.error("Recognition Error during permission flow:", event.error);
+            responseDiv.textContent = `권한 요청 에러: ${event.error}`;
+
+            // 거부됐거나 에러인 경우에도 end 이벤트는 발생 -> "상담 시작하기" 버튼이 노출됨
+            // 필요시 로직을 분기할 수 있음 (ex: 권한 거부 시 다른 UI)
+        });
+
+        // ============================
+        // 2단계: "상담 시작하기" 버튼 로직
+        // ============================
+        startBtn.addEventListener('click', () => {
+            startBtn.style.display = 'none';
+            consultGif.style.display = 'block';
+            changeGif("상담.gif");
+
+            // 권한 허용 후, 실제 상담 TTS 안내
+            const initial_text = "안녕하세요, 인공지능 기반 ARS 고객 지원 시스템입니다. 안내 중에도 말씀하시면 인식이 진행됩니다.";
+            pollyTTS(initial_text); // TTS 재생
+
+            // 음성 인식 “항상 켜두기”
+            recognition.start();
+            responseDiv.textContent = "음성 인식이 켜졌습니다. TTS 중간에도 말씀하시면 바로 인식됩니다.";
+        });
+
+        // 음성 인식 결과 이벤트 (동시 동작)
+        recognition.addEventListener('result', (event) => {
+            const transcript = event.results[event.results.length - 1][0].transcript;
+            responseDiv.textContent = `인식된 텍스트: ${transcript}`;
+
+            // Barge-in: 사용자 발화 시 TTS 중이면 즉시 중단
+            if (!audio.paused) {
+                audio.pause();
+                audio.currentTime = 0;
+            }
+
+            sendToServer(transcript);
+        });
+
+        // 음성 인식 에러 (실제 상담 중)
+        // (주의: permission 요청 중 에러와는 구분)
+        // 여기선 별도로 로그만 남김
+        recognition.addEventListener('error', (event) => {
+            console.error("Recognition Error:", event.error);
+            responseDiv.textContent = `음성 인식 오류: ${event.error}`;
+        });
+
+        // 음성 인식 세션이 끊기면 다시 켜서 항상 바지인 대기
+        recognition.addEventListener('end', () => {
+            console.log("Recognition ended. Restarting for barge-in...");
+            recognition.start();
+        });
+
+        // 서버 통신
+        function sendToServer(transcript) {
+            fetch('/get-response', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message: transcript })
+            })
+            .then(response => response.json())
+            .then(data => {
+                const text = data.response;
+                responseDiv.textContent = `서버 응답: ${text}`;
+                pollyTTS(text);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                responseDiv.textContent = `서버 오류: ${error.message || error}`;
+            });
+        }
+
+        // Polly TTS (음성 인식 계속 동작)
+        function pollyTTS(text) {
+            const polly = new AWS.Polly({ apiVersion: '2016-06-10' });
+            const params = {
+                OutputFormat: "mp3",
+                Text: text,
+                VoiceId: "Seoyeon"
+            };
+
+            polly.synthesizeSpeech(params, (err, data) => {
+                if (err) {
+                    console.error("TTS 오류: ", err);
+                    responseDiv.textContent = `TTS 오류: ${err.message || err}`;
+                } else if (data && data.AudioStream) {
+                    const blob = new Blob([data.AudioStream], { type: 'audio/mp3' });
+                    audio.src = URL.createObjectURL(blob);
+
+                    audio.play()
+                        .then(() => { console.log("Audio playback started"); })
+                        .catch(e => { console.error("Audio playback error:", e); });
+
+                    audio.addEventListener('ended', () => {
+                        console.log("TTS 재생 종료");
+                    });
+                }
+            });
+        }
+
+        function changeGif(gifFilename) {
+            consultGif.src = `/static/images/${gifFilename}`;
+        }
+    </script>
+</body>
+</html>

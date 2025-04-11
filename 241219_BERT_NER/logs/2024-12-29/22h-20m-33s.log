@@ -1,0 +1,5 @@
+﻿2024-12-29 22:20:33,542 [__main__] [INFO] :: *** 22h-20m-33s START ***
+2024-12-29 22:20:33,542 [__main__] [INFO] :: *** PID: 1970004 ***
+2024-12-29 22:20:46,341 [__main__] [INFO] :: Received message: 짜장면 얼마야
+2024-12-29 22:20:46,368 [__main__] [INFO] :: Intent ID: 1
+2024-12-29 22:20:46,509 [__main__] [ERROR] :: Error: get_best_match() missing 2 required positional arguments: 'cached_embeddings' and 'cached_keys'

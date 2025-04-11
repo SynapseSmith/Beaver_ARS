@@ -1,0 +1,5 @@
+﻿2024-12-29 22:14:43,279 [__main__] [INFO] :: *** 22h-14m-43s START ***
+2024-12-29 22:14:43,280 [__main__] [INFO] :: *** PID: 1966342 ***
+2024-12-29 22:14:57,436 [__main__] [INFO] :: Received message: 짜장면 얼마야
+2024-12-29 22:14:57,495 [__main__] [INFO] :: Intent ID: 1
+2024-12-29 22:14:57,677 [__main__] [ERROR] :: Error: 'RobertaForSequenceClassification' object has no attribute 'encode'

@@ -1,0 +1,56 @@
+{
+  "best_metric": 0.983739837398374,
+  "best_model_checkpoint": "/home/user09/beaver/data/shared_files/241215_BERT/checkpoint/klue_roberta_large_v2/checkpoint-279",
+  "epoch": 4.0,
+  "global_step": 372,
+  "is_hyper_param_search": false,
+  "is_local_process_zero": true,
+  "is_world_process_zero": true,
+  "log_history": [
+    {
+      "epoch": 1.0,
+      "eval_accuracy": 0.8915989159891599,
+      "eval_f1": 0.8736276262119199,
+      "eval_loss": 0.3784934878349304,
+      "eval_runtime": 0.4724,
+      "eval_samples_per_second": 781.083,
+      "eval_steps_per_second": 50.802,
+      "step": 93
+    },
+    {
+      "epoch": 2.0,
+      "eval_accuracy": 0.967479674796748,
+      "eval_f1": 0.9656149451371902,
+      "eval_loss": 0.1679794043302536,
+      "eval_runtime": 0.4535,
+      "eval_samples_per_second": 813.741,
+      "eval_steps_per_second": 52.926,
+      "step": 186
+    },
+    {
+      "epoch": 3.0,
+      "eval_accuracy": 0.983739837398374,
+      "eval_f1": 0.9838141872552298,
+      "eval_loss": 0.08977821469306946,
+      "eval_runtime": 0.454,
+      "eval_samples_per_second": 812.763,
+      "eval_steps_per_second": 52.863,
+      "step": 279
+    },
+    {
+      "epoch": 4.0,
+      "eval_accuracy": 0.983739837398374,
+      "eval_f1": 0.9836579783804552,
+      "eval_loss": 0.10006740689277649,
+      "eval_runtime": 0.4537,
+      "eval_samples_per_second": 813.382,
+      "eval_steps_per_second": 52.903,
+      "step": 372
+    }
+  ],
+  "max_steps": 1860,
+  "num_train_epochs": 20,
+  "total_flos": 175885995200256.0,
+  "trial_name": null,
+  "trial_params": null
+}

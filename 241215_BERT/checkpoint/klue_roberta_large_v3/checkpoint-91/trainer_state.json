@@ -1,0 +1,26 @@
+{
+  "best_metric": 0.9340659340659341,
+  "best_model_checkpoint": "/home/user09/beaver/data/shared_files/241215_BERT/checkpoint/klue_roberta_large_v3/checkpoint-91",
+  "epoch": 1.0,
+  "global_step": 91,
+  "is_hyper_param_search": false,
+  "is_local_process_zero": true,
+  "is_world_process_zero": true,
+  "log_history": [
+    {
+      "epoch": 1.0,
+      "eval_accuracy": 0.9340659340659341,
+      "eval_f1": 0.9261926382502569,
+      "eval_loss": 0.19219748675823212,
+      "eval_runtime": 0.4282,
+      "eval_samples_per_second": 850.117,
+      "eval_steps_per_second": 53.716,
+      "step": 91
+    }
+  ],
+  "max_steps": 1820,
+  "num_train_epochs": 20,
+  "total_flos": 43585592286336.0,
+  "trial_name": null,
+  "trial_params": null
+}
