@@ -385,97 +385,39 @@ curl -X POST http://localhost:1117/order \
 
 ## 🧪 개발 과정
 
-### 1. 문제 정의 및 데이터 수집 (Week 1-2)
+### 1. 문제 정의 및 데이터 수집 
 - 레스토랑 도메인 48개 의도 정의
 - 실제 고객 문의 데이터 수집 (3,000+ 샘플)
 - 데이터 라벨링 및 검증
 
-### 2. Intent Classification 개발 (Week 3-4)
+### 2. Intent Classification 개발
 - 다양한 모델 실험 (BERT, RoBERTa, ELECTRA)
 - Hyperparameter Tuning (학습률, 배치 크기, Epoch)
 - 데이터 증강 (Back-translation, Paraphrasing)
 
-### 3. NER 모델 개발 (Week 5-6)
+### 3. NER 모델 개발
 - CoNLL 형식 데이터 변환
 - IO Tagging → BIO Tagging 전환 고려
 - Entity-level 평가 지표 구현
 
-### 4. 검색 시스템 구축 (Week 7)
+### 4. 검색 시스템 구축
 - BM25 구현 및 최적화
 - Sentence-BERT 임베딩
 - 하이브리드 가중치 실험 (0.3 BM25 + 0.7 Semantic)
 
-### 5. 데이터베이스 연동 (Week 8)
+### 5. 데이터베이스 연동
 - SQL 스키마 설계
 - Template 기반 응답 생성 로직
 - Slot Filling 알고리즘
 
-### 6. 웹 서비스 개발 (Week 9-10)
+### 6. 웹 서비스 개발
 - Flask API 구현
 - 음성 입출력 통합 (TTS/STT)
 - UI/UX 개선
 
-### 7. 테스트 및 최적화 (Week 11-12)
+### 7. 테스트 및 최적화
 - End-to-End 테스트
 - 성능 최적화 (모델 양자화, 캐싱)
 - 배포 환경 구축
 
 ---
-
-## 🔮 향후 계획
-
-### 단기 (1-3개월)
-- [ ] Multi-turn Dialogue 지원 (대화 컨텍스트 관리)
-- [ ] 감정 분석 추가 (긍정/부정/중립)
-- [ ] 다국어 지원 (영어, 중국어, 일본어)
-- [ ] A/B 테스트 프레임워크 구축
-
-### 중기 (3-6개월)
-- [ ] GPT 기반 Generative 응답 추가
-- [ ] 음성 인식 정확도 개선 (Custom STT)
-- [ ] 관리자 대시보드 개발
-- [ ] 실시간 학습 (Online Learning)
-
-### 장기 (6개월+)
-- [ ] Multi-modal 입력 (이미지, 동영상)
-- [ ] 추천 시스템 통합
-- [ ] 다양한 업종 확장 (병원, 은행, 공공기관)
-- [ ] Edge Device 배포 (경량화 모델)
-
----
-
-## 🤝 기여 방법
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
----
-
-## 📜 라이선스
-
-이 프로젝트는 MIT 라이선스 하에 배포됩니다. 자세한 내용은 [LICENSE](LICENSE) 파일을 참조하세요.
-
----
-
-## 📧 연락처
-
-**프로젝트 관리자**: [Your Name]  
-**이메일**: your.email@example.com  
-**GitHub**: [@yourusername](https://github.com/yourusername)
-
----
-
-## 🙏 감사의 말
-
-- Hugging Face 팀 (Transformers 라이브러리)
-- KLUE 벤치마크 팀 (한국어 사전학습 모델)
-- Flask 커뮤니티
-- Weights & Biases (실험 추적 도구)
-
----
-
-**⭐ Star this repository if you find it helpful!**
-
