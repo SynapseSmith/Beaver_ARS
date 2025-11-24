@@ -1,0 +1,109 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+venv/
+ENV/
+env/
+.venv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# PyTorch
+*.pth
+*.pt
+*.ckpt
+
+# Model Checkpoints (큰 파일)
+checkpoint/
+*.bin
+*.safetensors
+
+# Logs
+logs/
+*.log
+wandb/
+
+# Data Files (큰 데이터는 제외)
+*.csv
+*.xlsx
+*.json
+*.jsonl
+*.conll
+!data/sample*.csv
+!data/example*.xlsx
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Environment Variables
+.env
+.env.local
+.env.*.local
+
+# Cache
+.cache/
+*.cache
+.pytest_cache/
+
+# Coverage
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+coverage.xml
+*.cover
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary Files
+tmp/
+temp/
+*.tmp
+
+# Backup Files
+*.bak
+*.backup
+*~
+
+# Large Media Files
+*.mp3
+*.wav
+*.mp4
+*.avi
+
+# Static Files (생성된 파일)
+static/uploads/
+static/cache/

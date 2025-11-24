@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>홍콩반점 강남점 ARS</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+        }
+
+        #title-container {
+            width: 100%;
+            text-align: center;
+            padding: 20px 0;
+            position: absolute;
+            top: 150px;
+            background-color: #f4f4f4;
+            z-index: 10;
+        }
+
+        #container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100%;
+            margin-top: 100px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 30px;
+        }
+
+        button {
+            padding: 20px 40px;
+            font-size: 20px;
+            cursor: pointer;
+            border-radius: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #response {
+            margin-top: 20px;
+            font-size: 18px;
+            white-space: pre-line;
+        }
+
+        /* GIF 파일을 넣는 부분 */
+        #consult-gif {
+            display: none;
+            width: 350px;
+            height: auto;
+            margin-top: 20px;
+        }
+
+        #inputText {
+            font-size: 18px;
+            padding: 10px;
+            margin-bottom: 20px;
+            width: 300px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div id="title-container">
+        <h1>홍콩반점 강남점 ARS</h1>
+    </div>
+
+    <div id="container">
+        <input type="text" id="inputText" placeholder="질문을 입력하세요..." />
+        <button id="start-btn">전송</button>
+        <img id="consult-gif" src="{{ url_for('static', filename='images/상담.gif') }}">
+        <div id="response"></div>
+    </div>
+
+    <script>
+        const responseDiv = document.getElementById('response');
+        const startBtn = document.getElementById('start-btn');
+        const inputText = document.getElementById('inputText');
+        const consultGif = document.getElementById('consult-gif');
+
+        // 첫 인사 및 텍스트 전송을 버튼 클릭으로 처리
+        startBtn.addEventListener('click', () => {
+            const transcript = inputText.value.trim(); // 입력된 텍스트 가져오기
+            if (transcript) {
+                startBtn.style.display = 'none';  // 버튼을 숨김
+                consultGif.style.display = 'block';  // GIF를 표시
+                changeGif("상담.gif");
+
+                // 첫 인사말 TTS 시작
+                const initial_text = "시작";
+                const utterance = new SpeechSynthesisUtterance(initial_text);
+                utterance.lang = 'ko-KR';  // 한국어 TTS 설정
+                window.speechSynthesis.speak(utterance);
+
+                // TTS가 끝난 후 텍스트 전송
+                utterance.onend = () => {
+                    changeGif("음성인식.gif");  // 음성 인식 GIF로 변경
+                    sendToServer(transcript);  // 서버로 텍스트 전송
+                };
+            } else {
+                alert('질문을 입력해주세요.');
+            }
+        });
+
+        // 서버로 인식된 텍스트 전송 및 스트리밍 응답 수신
+        function sendToServer(transcript) {
+            fetch('/get-response', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'text/event-stream',
+                },
+                body: JSON.stringify({ message: transcript })  // 입력된 텍스트를 서버에 전송
+            })
+            //.then(response => response.json())
+            //.then(data => console.log('주문 결과:', data))
+            //.catch(error => console.error('Error:', error));
+            // SSE (EventSource)로 서버와 실시간 스트리밍 연결
+            const eventSource = new EventSource(`https://80f0-203-229-206-42.ngrok-free.app/order`);
+
+            responseDiv.textContent = "";  // 기존 텍스트 초기화
+
+            eventSource.onmessage = function(event) {
+                const chunk = event.data;
+                console.log("스트리밍 데이터 수신:", chunk);
+                responseDiv.textContent += chunk;
+
+                // 받은 데이터를 TTS로 변환
+                const utterance = new SpeechSynthesisUtterance(chunk);
+                utterance.lang = 'ko-KR';
+                window.speechSynthesis.speak(utterance);
+            };
+
+            eventSource.onerror = function(event) {
+                console.error("EventSource 연결 에러 발생.");
+                eventSource.close();
+            };
+        }
+
+        // GIF 파일을 변경하는 함수
+        function changeGif(gifFilename) {
+            consultGif.src = `/static/images/${gifFilename}`;
+        }
+    </script>
+</body>
+</html>
+

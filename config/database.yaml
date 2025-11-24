@@ -1,0 +1,105 @@
+# Database Configuration for Beaver ARS
+# MySQL Database Setup
+
+# Development Environment
+development:
+  host: "localhost"
+  port: 3306
+  database: "beaver_ars_dev"
+  user: "dev_user"
+  password: "dev_password"
+  charset: "utf8mb4"
+  collation: "utf8mb4_unicode_ci"
+  pool:
+    size: 5
+    max_overflow: 10
+    timeout: 30
+    recycle: 3600
+
+# Production Environment
+production:
+  host: "your-production-host.com"
+  port: 3306
+  database: "beaver_ars_prod"
+  user: "prod_user"
+  password: "your_secure_password"  # Use environment variable in production
+  charset: "utf8mb4"
+  collation: "utf8mb4_unicode_ci"
+  pool:
+    size: 20
+    max_overflow: 40
+    timeout: 30
+    recycle: 3600
+  ssl:
+    enabled: true
+    ca_cert: "/path/to/ca-cert.pem"
+
+# Database Tables Schema Reference
+tables:
+  menus:
+    columns:
+      - menu_id: INT PRIMARY KEY AUTO_INCREMENT
+      - menu_name: VARCHAR(255)
+      - category: VARCHAR(100)
+      - price: DECIMAL(10,2)
+      - description: TEXT
+      - is_available: BOOLEAN
+    indexes:
+      - category
+      - menu_name
+  
+  orders:
+    columns:
+      - order_id: INT PRIMARY KEY AUTO_INCREMENT
+      - user_id: VARCHAR(100)
+      - menu_id: INT
+      - quantity: INT
+      - total_price: DECIMAL(10,2)
+      - order_time: DATETIME
+      - status: VARCHAR(50)
+    indexes:
+      - user_id
+      - order_time
+      - status
+    foreign_keys:
+      - menu_id: REFERENCES menus(menu_id)
+  
+  conversations:
+    columns:
+      - conversation_id: INT PRIMARY KEY AUTO_INCREMENT
+      - user_id: VARCHAR(100)
+      - user_message: TEXT
+      - intent: VARCHAR(100)
+      - entities: JSON
+      - bot_response: TEXT
+      - timestamp: DATETIME
+    indexes:
+      - user_id
+      - timestamp
+      - intent
+  
+  faqs:
+    columns:
+      - faq_id: INT PRIMARY KEY AUTO_INCREMENT
+      - question: TEXT
+      - answer: TEXT
+      - category: VARCHAR(100)
+      - views: INT
+      - last_updated: DATETIME
+    indexes:
+      - category
+    fulltext:
+      - question
+      - answer
+
+# Connection String Examples
+connection_strings:
+  sqlalchemy: "mysql+pymysql://{user}:{password}@{host}:{port}/{database}?charset=utf8mb4"
+  raw: "mysql://{user}:{password}@{host}:{port}/{database}"
+
+# Backup Configuration
+backup:
+  enabled: true
+  schedule: "0 2 * * *"  # Daily at 2 AM
+  retention_days: 30
+  backup_path: "/var/backups/beaver_ars"

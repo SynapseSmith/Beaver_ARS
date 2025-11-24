@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>인공지능 ARS</title>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+        }
+
+        #title-container {
+            width: 100%;
+            text-align: center;
+            padding: 20px 0;
+            position: absolute;
+            top: 150px;
+            background-color: #f4f4f4;
+            z-index: 10;
+        }
+
+        #container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100%;
+            margin-top: 100px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 30px;
+        }
+
+        button {
+            padding: 20px 40px;
+            font-size: 20px;
+            cursor: pointer;
+            border-radius: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #response {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+
+        #consult-gif {
+            display: none;
+            width: 350px;
+            height: auto;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="title-container">
+        <h1>인공지능 ARS</h1>
+    </div>
+
+    <div id="container">
+        <button id="start-btn">상담 시작하기</button>
+        <img id="consult-gif" src="{{ url_for('static', filename='images/상담.gif') }}">
+        <div id="response"></div>
+    </div>
+
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.410.0.min.js"></script>
+    <script type="text/javascript">
+        AWS.config.region = 'ap-northeast-2';
+        AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+            IdentityPoolId: 'ap-northeast-2:bf5fce7d-c4a9-45c8-82e4-caa69740769a'
+        });
+
+        const responseDiv = document.getElementById('response');
+        const startBtn = document.getElementById('start-btn');
+        const consultGif = document.getElementById('consult-gif');
+
+        let audio = new Audio();
+
+        startBtn.addEventListener('click', () => {
+            startBtn.style.display = 'none';
+            consultGif.style.display = 'block';
+            changeGif("상담.gif");
+            const initial_text = "안녕하세요, 인공지능 기반 에이얼에스 고객 지원 시스템입니다. 무엇을 도와드릴까요";
+            pollyTTS(initial_text, () => setTimeout(startRecognition, 500));
+        });
+
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        const recognition = new SpeechRecognition();
+        recognition.lang = 'ko-KR';
+        recognition.interimResults = false;
+        recognition.maxAlternatives = 1;
+        recognition.continuous = true;
+
+        function startRecognition() {
+            recognition.start();
+            responseDiv.textContent = "음성 인식중입니다. 문의사항을 말씀해주세요.";
+        }
+
+        recognition.addEventListener('result', (event) => {
+            const transcript = event.results[event.results.length - 1][0].transcript.trim();
+            if (!transcript) {
+                console.log("빈 입력이 감지되었습니다."); // 빈 입력 무시
+                return;
+            }
+            responseDiv.textContent = `인식된 텍스트: ${transcript}`;
+            sendToServer(transcript); // 서버로 유효한 입력만 전달
+        });
+
+        recognition.addEventListener('error', (event) => {
+            responseDiv.textContent = `음성 인식 오류: ${event.error}`;
+        });
+
+        recognition.addEventListener('end', () => {
+            if (audio.ended || audio.paused) {
+                recognition.start(); // 바로 음성 인식 재시작
+            }
+        });
+
+        function sendToServer(transcript) {
+            fetch('/get-response', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ message: transcript })
+            })
+            .then(response => response.json())
+            .then(data => {
+                const text = data.response;
+                responseDiv.textContent = `서버 응답: ${text}`;
+                pollyTTS(text, () => {
+                    changeGif("음성인식.gif");
+                    startRecognition();
+                });
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                responseDiv.textContent = `서버 오류: ${error.message || error}`;
+            });
+        }
+
+        function pollyTTS(text, callback) {
+            const polly = new AWS.Polly({ apiVersion: '2016-06-10' });
+            const params = {
+                OutputFormat: "mp3",
+                Text: text,
+                VoiceId: "Seoyeon"
+            };
+            polly.synthesizeSpeech(params, (err, data) => {
+                if (err) {
+                    console.error("TTS 오류: ", err);
+                    responseDiv.textContent = `TTS 오류: ${err.message || err}`;
+                } else if (data && data.AudioStream) {
+                    const blob = new Blob([data.AudioStream], { type: 'audio/mp3' });
+                    audio.src = URL.createObjectURL(blob);
+                    audio.play().then(() => {
+                        console.log("Audio playback started");
+                    });
+                    audio.addEventListener('ended', callback);
+                }
+            });
+        }
+
+        function changeGif(gifFilename) {
+            consultGif.src = `/static/images/${gifFilename}`;
+        }
+    </script>
+</body>
+</html>
