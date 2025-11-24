@@ -18,8 +18,9 @@ echo -e "${GREEN}  Beaver ARS Training Pipeline${NC}"
 echo -e "${GREEN}=====================================${NC}"
 
 # Set memory optimization environment variables
-export PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:512
+export PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:1024
 export CUDA_LAUNCH_BLOCKING=0
+export TF_ENABLE_ONEDNN_OPTS=0
 
 # Activate virtual environment
 VENV_PATH="/opt/fastapi-poc/venv"
@@ -27,7 +28,7 @@ if [ -d "${VENV_PATH}" ]; then
     echo -e "\n${YELLOW}Activating virtual environment...${NC}"
     source "${VENV_PATH}/bin/activate"
     echo -e "  ${GREEN}✓ Virtual environment activated${NC}"
-    PYTHON_CMD="python"
+    PYTHON_CMD="python3"
 else
     echo -e "${YELLOW}⚠ Virtual environment not found, using system Python${NC}"
     PYTHON_CMD="/opt/fastapi-poc/venv/bin/python"
@@ -36,17 +37,18 @@ fi
 # Configuration
 DATA_DIR="./data"
 MODEL_DIR="./models"
-INTENT_DATA="${DATA_DIR}/sample/intent_sample.csv"
-NER_DATA="${DATA_DIR}/sample/ner_sample.conll"
+INTENT_DATA="${DATA_DIR}/train/intent_data.csv"  # 전체 데이터셋 사용
+NER_DATA="${DATA_DIR}/train/ner_data.conll"      # 전체 데이터셋 사용
 INTENT_MODEL_DIR="${MODEL_DIR}/intent_classifier"
 NER_MODEL_DIR="${MODEL_DIR}/ner_model"
 
 # Training parameters
 INTENT_EPOCHS=20
 NER_EPOCHS=15
-BATCH_SIZE=4  # Reduced from 16 to prevent memory issues
+BATCH_SIZE=32  # RTX 5090 32GB VRAM 활용
 LEARNING_RATE=2e-5
-GRADIENT_ACCUMULATION=4  # Effective batch size = 4 * 4 = 16
+GRADIENT_ACCUMULATION=1  # Effective batch size = 32
+MODEL_NAME="klue/roberta-large"  # 원래 모델로 복구
 
 # Function: Check prerequisites
 check_prerequisites() {
@@ -132,6 +134,7 @@ train_intent() {
     ${PYTHON_CMD} src/241215_step1_train_cls_intent.py \
         --data_path "${INTENT_DATA}" \
         --output_dir "${INTENT_MODEL_DIR}" \
+        --model_name "${MODEL_NAME}" \
         --num_epochs ${INTENT_EPOCHS} \
         --batch_size ${BATCH_SIZE} \
         --learning_rate ${LEARNING_RATE} \
@@ -272,12 +275,12 @@ main() {
     echo "  • NER Model: ${NER_EPOCHS} epochs"
     echo "  • Batch Size: ${BATCH_SIZE}"
     echo "  • Learning Rate: ${LEARNING_RATE}"
-    read -p "Continue? (y/n): " confirm
+    # read -p "Continue? (y/n): " confirm
     
-    if [ "$confirm" != "y" ]; then
-        echo "Training cancelled"
-        exit 0
-    fi
+    # if [ "$confirm" != "y" ]; then
+    #     echo "Training cancelled"
+    #     exit 0
+    # fi
     
     train_intent
     evaluate_intent

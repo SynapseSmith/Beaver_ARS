@@ -15,17 +15,23 @@ from transformers import (
 from sklearn.metrics import accuracy_score, f1_score
 
 
-# GPU 설정
-os.environ["CUDA_VISIBLE_DEVICES"] = "1"
+# Device 설정 - RTX 5090 GPU 사용
+import warnings
+warnings.filterwarnings('ignore', message='.*sm_120.*')  # sm_120 경고 무시
+
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print("Device:", device)
+if torch.cuda.is_available():
+    print(f"GPU: {torch.cuda.get_device_name(0)}")
+    print(f"CUDA Version: {torch.version.cuda}")
+    print(f"GPU Memory: {torch.cuda.get_device_properties(0).total_memory / 1024**3:.1f} GB")
 
 # Argument parser 설정
 parser = argparse.ArgumentParser(description="Train Intent Classifier")
 parser.add_argument("--data_path", type=str, required=True, help="Path to training data CSV")
 parser.add_argument("--output_dir", type=str, required=True, help="Directory to save model")
 parser.add_argument("--model_name", type=str, default="klue/roberta-large", help="Pretrained model name")
-parser.add_argument("--num_labels", type=int, default=24, help="Number of intent labels")
+parser.add_argument("--num_labels", type=int, default=48, help="Number of intent labels")
 parser.add_argument("--num_epochs", type=int, default=20, help="Number of training epochs")
 parser.add_argument("--batch_size", type=int, default=16, help="Training batch size")
 parser.add_argument("--learning_rate", type=float, default=2e-5, help="Learning rate")
@@ -76,7 +82,7 @@ def compute_metrics(eval_pred):
 # TrainingArguments 설정
 training_args = TrainingArguments(
     output_dir=args.output_dir,
-    evaluation_strategy="epoch",
+    eval_strategy="epoch",
     save_strategy="epoch",
     load_best_model_at_end=True,
     logging_dir=args.logging_dir,
@@ -89,7 +95,7 @@ training_args = TrainingArguments(
     weight_decay=0.01,
     metric_for_best_model="accuracy",
     greater_is_better=True,
-    fp16=True,  # Mixed precision training
+    fp16=torch.cuda.is_available(),  # GPU에서만 Mixed precision 사용
     optim="adamw_torch",
     gradient_checkpointing=True,  # Save memory
     report_to=[]
