@@ -44,11 +44,11 @@
 
 | 항목 | 성능 | 비고 |
 |------|------|------|
-| **Intent Classification** | **Accuracy 95.7%** | KLUE/RoBERTa-Large |
-| **NER Model** | **F1-Score 99.4%** | Macro-averaged |
-| **응답 시간** | **800ms 평균** | Intent + NER + Search + DB |
+| **Intent Classification** | **Accuracy 91.2%** | KLUE/RoBERTa-Large |
+| **NER Model** | **F1-Score 99.5%** | Macro-averaged |
+| **응답 시간** | **< 1초** | Intent + NER + Search + DB |
 | **데이터셋** | **2,824 samples** | 48 intents, 6 entity types |
-| **동시 처리** | **100+ req/sec** | Gunicorn 4 workers |
+| **동시 처리** | **병렬 처리 지원** | Gunicorn multi-worker |
 
 ---
 
@@ -227,7 +227,7 @@ Beaver_ARS/
 │
 ├── 📂 data/                        # 데이터셋
 │   ├── train/
-│   │   ├── intent_data.csv         # Intent 학습 데이터 (1,810 samples)
+│   │   ├── intent_data.csv         # Intent 학습 데이터 (2,824 samples)
 │   │   └── ner_data.conll          # NER 학습 데이터 (CoNLL format)
 │   ├── sample/                     # 샘플 데이터
 │   └── processed/                  # 전처리된 데이터 (자동 생성)
@@ -376,10 +376,10 @@ curl -X POST http://localhost:5000/chat \
 |----------|--------|-----|
 | **Model** | KLUE/RoBERTa-Large | KLUE/RoBERTa-Large |
 | **Epochs** | 30 | 30 |
-| **Batch Size** | 16 | 16 |
-| **Learning Rate** | 1e-4 | 5e-5 |
+| **Batch Size** | 16 | 8 |
+| **Learning Rate** | 1e-4 | 2e-5 |
 | **Gradient Accumulation** | 4 | 4 |
-| **Effective Batch** | 64 | 64 |
+| **Effective Batch** | 64 | 32 |
 
 ### W&B 실험 추적
 
@@ -477,14 +477,11 @@ chmod +x deploy.sh
 **Endpoint**: `GET /metrics`
 
 ```
-# Intent Classification 정확도
-intent_classification_accuracy 0.957
-
-# 평균 응답 시간 (ms)
-response_time_ms_avg 850
-
-# 초당 요청 수
-requests_per_second 45
+# 시스템 메트릭 수집
+# - 요청 처리 시간
+# - API 호출 카운트
+# - 에러 발생률
+# - 모델 로딩 상태
 ```
 
 ---
@@ -495,67 +492,67 @@ requests_per_second 45
 
 | Metric | Value |
 |--------|-------|
-| **Accuracy** | **95.7%** |
-| **Weighted F1-Score** | **95.2%** |
-| **Macro F1-Score** | **93.8%** |
-| **Inference Time** | **18ms** |
+| **Accuracy** | **91.2%** |
+| **Weighted F1-Score** | **91.0%** |
+| **Training Loss** | **0.509** |
+| **Model** | **KLUE/RoBERTa-Large** |
 
-**Confusion Matrix 분석**:
-- 메뉴 관련 Intent: 97.2% 정확도
-- 영업 정보 Intent: 94.8% 정확도
-- Fallback Intent: 89.3% 정확도
+**학습 데이터**:
+- 총 2,824 샘플 (Train: 2,259 / Eval: 565)
+- 48개 Intent 클래스
+- 30 Epochs, Batch 16, LR 1e-4
 
 ### NER 결과
 
 | Entity Type | Precision | Recall | F1-Score | Support |
-|-------------|-----------|--------|----------|---------|
-| **MENU** | 98.9% | 99.1% | 99.0% | 70 |
+|-------------|-----------|--------|----------|------|
+| **MENU** | 98.9% | 100.0% | 99.5% | 70 |
 | **PAYMENT** | 100.0% | 100.0% | 100.0% | 5 |
 | **DAY** | 100.0% | 100.0% | 100.0% | 17 |
-| **Macro Avg** | **99.6%** | **99.7%** | **99.4%** | **92** |
+| **Macro Avg** | **98.9%** | **100.0%** | **99.5%** | **92** |
 
 ### 시스템 성능
 
 ```
-┌─────────────────────────┬────────────┐
-│ 항목                     │ 성능       │
-├─────────────────────────┼────────────┤
-│ 평균 응답 시간            │ 850ms      │
-│ P95 응답 시간            │ 1,200ms    │
-│ P99 응답 시간            │ 1,800ms    │
-│ 동시 처리량               │ 100 req/s  │
-│ GPU 메모리 사용량         │ 11.2GB     │
-│ CPU 사용률               │ 45%        │
-└─────────────────────────┴────────────┘
+┌─────────────────────────┬────────────────────┐
+│ 항목                     │ 성능               │
+├─────────────────────────┼────────────────────┤
+│ Intent 분류              │ 91.2% Accuracy     │
+│ NER 추출                 │ 99.5% F1-Score     │
+│ 학습 데이터              │ 2,824 samples      │
+│ 지원 Intent              │ 48 classes         │
+│ 지원 Entity              │ 6 types (MENU/DAY) │
+│ GPU (학습)               │ RTX 5090 32GB      │
+└─────────────────────────┴────────────────────┘
 ```
 
 ---
 
 ## 🔧 문제 해결 과정
 
-### 1. 클래스 불균형 문제
-
-**문제**: 소수 클래스 F1-Score 45%  
-**해결**: Focal Loss + Class Weighting  
-**결과**: F1-Score 89% (+44%p)
-
-### 2. NER 토큰 정렬 문제
+### 1. NER 토큰 정렬 문제
 
 **문제**: WordPiece 토크나이저 서브토큰 불일치  
 **해결**: offset_mapping 기반 첫 서브토큰만 태깅  
-**결과**: F1-Score 99.0%
+**결과**: NER F1-Score 99.5% 달성
 
-### 3. 응답 시간 병목
+### 2. 하이브리드 검색 구현
 
-**문제**: 평균 2.8초 (Sentence-BERT 1.2초)  
-**해결**: BM25 + SBERT 하이브리드 (4:6)  
-**결과**: 0.8초 (-71%)
+**문제**: 단일 검색 방식의 한계  
+**해결**: BM25(키워드) + SBERT(의미) 결합 (4:6 가중치)  
+**결과**: 정확도와 유연성 모두 확보
 
-### 4. GPU 메모리 부족
+### 3. GPU 메모리 최적화
 
-**문제**: Batch 64 → CUDA OOM  
-**해결**: Gradient Accumulation (4 steps) + FP16  
-**결과**: 메모리 11.2GB, Effective Batch 64 유지
+**문제**: 대용량 모델 학습 시 메모리 부족  
+**해결**: Gradient Accumulation (4 steps) 적용  
+**결과**: Batch 16으로 Effective Batch 64 효과
+
+### 4. 48개 Intent 세분화
+
+**문제**: 포괄적 Intent로 정확도 저하  
+**해결**: 메뉴/영업/배달/시설/혜택 등 48개로 세분화  
+**결과**: 도메인별 정밀한 응답 생성 가능
 
 ---
 
