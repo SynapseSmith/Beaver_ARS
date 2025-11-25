@@ -33,8 +33,8 @@
 레스토랑 및 서비스 업종의 반복적인 고객 문의(메뉴, 영업시간, 결제 방법 등)를 AI로 자동화하여 **24/7 고객 응대**를 실현하는 엔터프라이즈급 챗봇 시스템입니다.
 
 ### 🎯 핵심 목표
-- **높은 정확도**: Intent 95.7%, NER 99.4% F1-Score
-- **빠른 응답**: 평균 800ms 이내 응답 생성
+- **높은 정확도**: Intent 97.7%, NER 99.5% F1-Score
+- **빠른 응답**: 1초 이내 응답 생성
 - **프로덕션 준비**: Docker + Nginx + Prometheus 모니터링
 - **확장 가능**: 48개 Intent, 다양한 도메인 적용 가능
 
@@ -47,7 +47,7 @@
 | **Intent Classification** | **Accuracy 97.7%** | KLUE/RoBERTa-Large |
 | **NER Model** | **F1-Score 99.5%** | Macro-averaged |
 | **응답 시간** | **< 1초** | Intent + NER + Search + DB |
-| **데이터셋** | **2,824 samples** | 48 intents, 6 entity types |
+| **데이터셋** | **2,856 samples** | 48 intents, 6 entity types |
 | **동시 처리** | **병렬 처리 지원** | Gunicorn multi-worker |
 
 ---
@@ -233,13 +233,13 @@ Beaver_ARS/
 │   └── processed/                  # 전처리된 데이터 (자동 생성)
 │
 ├── 📂 src/                         # 소스 코드
-│   ├── 241215_step0_intent_mapping.py       # Intent 라벨 매핑
-│   ├── 241215_step1_train_cls_intent.py     # Intent 분류 학습
-│   ├── 241215_step1_inference_cls_intent.py # Intent 추론
-│   ├── 241215_step1_evaluation_cls_intent.py # Intent 평가
-│   ├── 241218_step1_ner_train_i_tagging.py  # NER 학습
-│   ├── 241218_step2_ner_evaluation.py       # NER 평가
-│   ├── 241215_step2_response_template.py    # 응답 템플릿
+│   ├── intent_mapping.py           # Intent 라벨 매핑
+│   ├── intent_training.py          # Intent 분류 학습
+│   ├── intent_inference.py         # Intent 추론
+│   ├── intent_evaluation.py        # Intent 평가
+│   ├── ner_training.py             # NER 학습
+│   ├── ner_evaluation.py           # NER 평가
+│   ├── response_templates.py       # 응답 템플릿
 │   ├── main_ars_system.py          # 통합 ARS 시스템 (메인)
 │   ├── web_server.py               # Flask 웹 서버
 │   └── main_system.py              # 시스템 엔트리포인트
@@ -314,7 +314,7 @@ pip install -r requirements.txt
 ### 2. 데이터 준비
 
 데이터는 `data/train/` 디렉토리에 준비되어 있습니다:
-- `intent_data.csv`: 2,824개 Intent 샘플
+- `intent_data.csv`: 2,856개 Intent 샘플
 - `ner_data.conll`: 2,170줄 NER 라벨링 데이터
 
 상세한 데이터 구조는 [DATA_GUIDE.md](DATA_GUIDE.md)를 참조하세요.
@@ -365,7 +365,7 @@ curl -X POST http://localhost:5000/chat \
 1. ✅ Prerequisites 확인 (Python, GPU, packages)
 2. ✅ 디렉토리 준비
 3. ✅ 데이터 검증
-4. ✅ Intent Classification 학습 (30 epochs)
+4. ✅ Intent Classification 학습 (50 epochs)
 5. ✅ Intent 모델 평가
 6. ✅ NER 모델 학습 (30 epochs)
 7. ✅ NER 모델 평가
@@ -375,9 +375,9 @@ curl -X POST http://localhost:5000/chat \
 | 파라미터 | Intent | NER |
 |----------|--------|-----|
 | **Model** | KLUE/RoBERTa-Large | KLUE/RoBERTa-Large |
-| **Epochs** | 30 | 30 |
-| **Batch Size** | 16 | 8 |
-| **Learning Rate** | 1e-4 | 2e-5 |
+| **Epochs** | 50 | 30 |
+| **Batch Size** | 16 | 16 |
+| **Learning Rate** | 5e-5 | 2e-5 |
 | **Gradient Accumulation** | 4 | 4 |
 | **Effective Batch** | 64 | 32 |
 
