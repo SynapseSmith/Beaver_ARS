@@ -28,7 +28,7 @@ parser.add_argument("--num_labels", type=int, default=48, help="Number of intent
 parser.add_argument("--batch_size", type=int, default=16, help="Evaluation batch size")
 args = parser.parse_args()
 
-# Intent dictionary 정의
+# Intent dictionary 정의 (main_ars_system.py와 동일한 표준 48개 인텐트)
 intents_dict = {
             0: "메뉴 카테고리 안내",
             1: "특정 상품 및 가격 안내", # 슬롯
@@ -37,7 +37,6 @@ intents_dict = {
             4: "(뱃지) 추천메뉴",
             5: "(뱃지) 대표메뉴",
             6: "(뱃지) 할인, 이벤트,",
-            33: "(뱃지) 1+1 메뉴 문의",
             7: "(뱃지) 신상 메뉴",
             8: "(뱃지) 한정 메뉴",
             9: "(뱃지) 매운맛",
@@ -64,7 +63,7 @@ intents_dict = {
             30: "근처 랜드마크 안내",
             31: "테이블 및 좌석 수 안내",
             32: "야외 테라스 또는 개별 룸 여부 안내",
-            # 33: "상점 규모 및 시설 추가 안내",
+            33: "(뱃지) 1+1 메뉴 문의",
             34: "멤버십 가입 안내",
             35: "멤버십 혜택 안내",
             36: "포인트 적립 안내",

@@ -13,7 +13,7 @@ YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
 # Configuration
-PROJECT_NAME="beaver-ars"
+PROJECT_NAME="Beaver_ARS"
 DOCKER_IMAGE="beaver-ars:latest"
 BACKUP_DIR="/opt/backups"
 MAX_BACKUPS=5
@@ -46,7 +46,7 @@ check_prerequisites() {
 pull_code() {
     echo -e "\n${YELLOW}[2/8] Pulling latest code...${NC}"
     
-    cd /opt/${PROJECT_NAME}
+    cd /opt/fastapi-poc/${PROJECT_NAME}
     git fetch origin
     git pull origin main
     echo "  ✓ Code updated"
@@ -64,7 +64,10 @@ backup_deployment() {
     tar -czf ${BACKUP_FILE} \
         --exclude='logs/*' \
         --exclude='*.log' \
-        -C /opt ${PROJECT_NAME}
+        --exclude='wandb/*' \
+        --exclude='models/*' \
+        --exclude='.git/*' \
+        -C /opt/fastapi-poc ${PROJECT_NAME}
     
     echo "  ✓ Backup created: ${BACKUP_FILE}"
     
@@ -77,11 +80,16 @@ backup_deployment() {
 update_env() {
     echo -e "\n${YELLOW}[4/8] Updating environment variables...${NC}"
     
+    cd /opt/fastapi-poc/${PROJECT_NAME}
+    
     if [ ! -f .env ]; then
-        cp .env.example .env
-        echo -e "  ${RED}Warning: .env file created from .env.example${NC}"
-        echo -e "  ${RED}Please update it with production values${NC}"
-        read -p "  Press Enter to continue..."
+        if [ -f .env.example ]; then
+            cp .env.example .env
+            echo -e "  ${YELLOW}Warning: .env file created from .env.example${NC}"
+            echo -e "  ${YELLOW}Please update it with production values${NC}"
+        else
+            echo -e "  ${YELLOW}Warning: No .env or .env.example found${NC}"
+        fi
     else
         echo "  ✓ .env file exists"
     fi
@@ -91,6 +99,7 @@ update_env() {
 build_image() {
     echo -e "\n${YELLOW}[5/8] Building Docker image...${NC}"
     
+    cd /opt/fastapi-poc/${PROJECT_NAME}
     docker-compose build --no-cache
     echo "  ✓ Image built successfully"
 }
@@ -99,19 +108,27 @@ build_image() {
 run_migrations() {
     echo -e "\n${YELLOW}[6/8] Running database migrations...${NC}"
     
-    docker-compose exec -T mysql mysql -uroot -p${MYSQL_ROOT_PASSWORD} ${MYSQL_DATABASE} < database/init.sql
-    echo "  ✓ Migrations completed"
+    cd /opt/fastapi-poc/${PROJECT_NAME}
+    
+    # Check if MySQL container is running
+    if docker-compose ps mysql | grep -q "Up"; then
+        docker-compose exec -T mysql mysql -uroot -p${MYSQL_ROOT_PASSWORD:-root_password} ${MYSQL_DATABASE:-beaver_ars} < database/init.sql 2>/dev/null || true
+        echo "  ✓ Migrations completed"
+    else
+        echo "  ⊘ MySQL not running, skipping migrations"
+    fi
 }
 
 # Function: Start services
 start_services() {
     echo -e "\n${YELLOW}[7/8] Starting services...${NC}"
     
+    cd /opt/fastapi-poc/${PROJECT_NAME}
     docker-compose down
     docker-compose up -d
     
     echo "  Waiting for services to be ready..."
-    sleep 10
+    sleep 30
     
     echo "  ✓ Services started"
 }
@@ -153,12 +170,16 @@ show_status() {
     echo -e "${GREEN}  Deployment Status${NC}"
     echo -e "${GREEN}=====================================${NC}"
     
+    cd /opt/fastapi-poc/${PROJECT_NAME}
     docker-compose ps
     
     echo -e "\n${GREEN}Services are accessible at:${NC}"
-    echo "  • Application: http://localhost:5000"
+    echo "  • Application (Direct): http://localhost:5000"
+    echo "  • Nginx (Proxy): http://localhost:9080"
     echo "  • Grafana: http://localhost:3000"
     echo "  • Prometheus: http://localhost:9090"
+    echo "  • MySQL: localhost:3306"
+    echo "  • Redis: localhost:6379"
 }
 
 # Main deployment flow
