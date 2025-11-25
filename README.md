@@ -44,7 +44,7 @@
 
 | 항목 | 성능 | 비고 |
 |------|------|------|
-| **Intent Classification** | **Accuracy 91.2%** | KLUE/RoBERTa-Large |
+| **Intent Classification** | **Accuracy 97.7%** | KLUE/RoBERTa-Large |
 | **NER Model** | **F1-Score 99.5%** | Macro-averaged |
 | **응답 시간** | **< 1초** | Intent + NER + Search + DB |
 | **데이터셋** | **2,824 samples** | 48 intents, 6 entity types |
@@ -492,15 +492,15 @@ chmod +x deploy.sh
 
 | Metric | Value |
 |--------|-------|
-| **Accuracy** | **91.2%** |
-| **Weighted F1-Score** | **91.0%** |
-| **Training Loss** | **0.509** |
+| **Accuracy** | **97.7%** |
+| **Weighted F1-Score** | **97.7%** |
+| **Eval Loss** | **0.153** |
 | **Model** | **KLUE/RoBERTa-Large** |
 
 **학습 데이터**:
-- 총 2,824 샘플 (Train: 2,259 / Eval: 565)
+- 총 2,856 샘플 (Train: 2,284 / Eval: 572)
 - 48개 Intent 클래스
-- 30 Epochs, Batch 16, LR 1e-4
+- 50 Epochs, Batch 16, LR 1e-4, Gradient Accumulation 4
 
 ### NER 결과
 
@@ -517,9 +517,9 @@ chmod +x deploy.sh
 ┌─────────────────────────┬────────────────────┐
 │ 항목                     │ 성능               │
 ├─────────────────────────┼────────────────────┤
-│ Intent 분류              │ 91.2% Accuracy     │
+│ Intent 분류              │ 97.7% Accuracy     │
 │ NER 추출                 │ 99.5% F1-Score     │
-│ 학습 데이터              │ 2,824 samples      │
+│ 학습 데이터              │ 2,856 samples      │
 │ 지원 Intent              │ 48 classes         │
 │ 지원 Entity              │ 6 types (MENU/DAY) │
 │ GPU (학습)               │ RTX 5090 32GB      │
