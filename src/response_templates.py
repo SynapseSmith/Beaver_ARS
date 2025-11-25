@@ -3,6 +3,7 @@ import torch
 import random
 import re
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
+import os
 from pandasql import sqldf
 
 # === 1. 학습된 모델 및 토크나이저 로드 === #

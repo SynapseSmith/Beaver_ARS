@@ -1,7 +1,4 @@
 import os
-
-os.environ["HF_HOME"] = "/home/user09/beaver/beaver_shared/data/cache"
-
 import time
 import torch
 import random
@@ -15,6 +12,7 @@ from rank_bm25 import BM25Okapi
 import re
 from transformers import AutoModelForTokenClassification
 from sentence_transformers import SentenceTransformer, util
+import numpy as np
 
 # === Flask App 초기화 === #
 app = Flask(__name__)
@@ -45,9 +43,11 @@ def load_logger(log_dir, log_level):
 
 curtime = time.strftime("%Hh-%Mm-%Ss")
 date = time.strftime("%Y-%m-%d")
-log_folder = os.path.join('/home/user09/beaver/beaver_shared/data/shared_files/241219_BERT_NER/logs', date)
+# 프로젝트 루트 경로 기준
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+log_folder = os.path.join(PROJECT_ROOT, 'logs', date)
 if not os.path.exists(log_folder):
-    os.mkdir(log_folder)
+    os.makedirs(log_folder, exist_ok=True)
 
 logdir = os.path.join(log_folder, curtime + '.log')
 logger = load_logger(logdir, 'INFO')
@@ -57,54 +57,57 @@ logger.info(f'*** PID: {os.getpid()} ***')
 # === Args 클래스 및 모델 로드 === #
 class Args:
     def __init__(self):
+        # 프로젝트 루트 경로 기준
+        PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        
         self.label_list = ["O", "B-MENU", "I-MENU", "B-PAYMENT", "I-PAYMENT", "B-DAY"]
-        self.model_checkpoint_path = "/home/user09/beaver/beaver_shared/data/shared_files/241218_NER/ner_checkpoint2"
+        self.model_checkpoint_path = os.path.join(PROJECT_ROOT, "models", "ner_model")
         self.sim_threshold = 0.6
-        self.output_dir = "/home/user09/beaver/beaver_shared/data/shared_files/241219_BERT_NER/checkpoint/klue_roberta_large_v9"
-        self.data_path = "/home/user09/beaver/beaver_shared/data/shared_files/241219_BERT_NER/data/dataset_SQL_general_ju_6_hong_preprocessed.xlsx"
+        self.output_dir = os.path.join(PROJECT_ROOT, "models", "intent_classifier")
+        self.data_path = os.path.join(PROJECT_ROOT, "data", "dataset_SQL_general_ju_6_hong_preprocessed.xlsx")
         
         self.intent_dict = {
             0: "메뉴 카테고리 안내",
-            1: "특정 상품 및 가격 안내", # 슬롯
+            1: "특정 상품 및 가격 안내",
             2: "상품에 대한 상세 및 추가 안내",
             3: "(뱃지) 인기메뉴",
             4: "(뱃지) 추천메뉴",
             5: "(뱃지) 대표메뉴",
-            6: "(뱃지) 할인, 이벤트 메뉴",
-            7: "(뱃지) 1+1 메뉴 문의",
-            8: "(뱃지) 신상 메뉴",
-            9: "(뱃지) 한정 메뉴",
-            10: "(뱃지) 매운맛",
-            11: "매장 주문 방식 안내 (키오스크, 테이블오더, 스마트주문 등)",
-            12: "주문한 상품 전달 방식 안내 (내점, 포장, 배달 등)",
-            13: "결제 방법 안내(현금, 카드, 간편 결제 등)",
-            14: "특정 결제 방법 상세 안내", # 슬롯
-            15: "결제 방법 추가 안내",
-            16: "영업 시간 안내",
+            6: "(뱃지) 할인, 이벤트,",
+            7: "(뱃지) 신상 메뉴",
+            8: "(뱃지) 한정 메뉴",
+            9: "(뱃지) 매운맛",
+            10: "주문 방식 안내 (키오스크, 테이블오더, 스마트주문 등)",
+            11: "주문한 상품 전달 방식 안내 (내점, 포장, 배달 등)",
+            12: "결제 방법 안내(현금, 카드, 간편 결제 등)",
+            13: "특정 결제 방법 상세 안내",
+            14: "결제 방법 추가 안내",
+            15: "영업 시간 안내",
+            16: "영업 시간 상세 안내",
             17: "브레이크 타임 안내",
-            18: "휴무일 안내 (정기 - 임시휴무/주말/공휴일)",
-            19: "휴무일 상세 안내 (정기 - 임시휴무/주말/공휴일)",
-            20: "영업시간 및 휴무일 추가 안내",
-            21: "특정 요일에 대한 영업 여부", # 슬롯
-            22: "배달 가능 지역 안내",
-            23: "배달비 및 최소 주문 금액 안내",
-            24: "배달 추가 안내",
-            25: "테이블 점유 안내",
-            26: "테이블 점유 추가 안내",
-            27: "상점 주소 안내 및 지도 링크 전달",
-            28: "대중교통 이용 방법 안내",
-            29: "근처 랜드마크 안내",
-            30: "테이블 및 좌석 수 안내",
-            31: "단체석 및 예약석 유무 안내",
+            18: "브레이크 타임 상세 안내",
+            19: "휴무일 안내 (정기 - 임시휴무/주말/공휴일)",
+            20: "휴무일 상세 안내 (정기 - 임시휴무/주말/공휴일)",
+            21: "영업시간 및 휴무일 추가 안내",
+            22: "특정 요일에 대한 영업 여부",
+            23: "배달 가능 지역 안내",
+            24: "배달비 및 최소 주문 금액 안내",
+            25: "배달 추가 안내",
+            26: "테이블 점유 안내",
+            27: "테이블 점유 추가 안내",
+            28: "상점 주소 안내 및 지도 링크 전달",
+            29: "대중교통 이용 방법 안내",
+            30: "근처 랜드마크 안내",
+            31: "테이블 및 좌석 수 안내",
             32: "야외 테라스 또는 개별 룸 여부 안내",
-            33: "상점 규모 및 시설 추가 안내",
+            33: "(뱃지) 1+1 메뉴 문의",
             34: "멤버십 가입 안내",
             35: "멤버십 혜택 안내",
             36: "포인트 적립 안내",
             37: "포인트 사용 안내",
             38: "쿠폰 발행 안내",
             39: "쿠폰 사용 안내",
-            40: "멤버십, 포인트 및 쿠폰에 대한 추가 안내",
+            40: "멤버십 및 쿠폰에 대한 추가 안내",
             41: "현재 진행 중인 이벤트 안내",
             42: "현재 진행 중인 이벤트 상세 안내",
             43: "현재 진행 중인 이벤트 추가 안내",
@@ -259,9 +262,6 @@ class Args:
                 ]
             }
         
-
-
-
 args = Args()
 
 # === 학습된 의도 분류 모델 및 토크나이저 로드 === #
@@ -422,21 +422,69 @@ def generate_response(intent_id, data):
 def initialize_embeddings(info_dict):
     keys = list(info_dict.keys())
     embeddings = embedding_model.encode(keys)  # 메뉴 키를 임베딩
-    return keys, embeddings
-
-# 유사도 계산 함수
-def get_best_match(user_input, info_dict, cached_embeddings, cached_keys, yn=False):
     
-    # 사용자 입력 임베딩
-    user_embedding = embedding_model.encode([user_input])[0]
+    # BM25 초기화: 메뉴명을 토큰화
+    tokenized_corpus = [list(key) for key in keys]  # 한글은 글자 단위로 토큰화
+    bm25 = BM25Okapi(tokenized_corpus)
+    
+    return keys, embeddings, bm25
 
-    # 코사인 유사도 계산
+# 하이브리드 검색 함수 (BM25 40% + SBERT 60%)
+def get_best_match_hybrid(user_input, info_dict, cached_embeddings, cached_keys, cached_bm25, yn=False):
+    """
+    하이브리드 검색: BM25(40%) + Sentence-BERT(60%)
+    """
+    # 1. Sentence-BERT 유사도 계산
+    user_embedding = embedding_model.encode([user_input])[0]
+    sbert_scores = util.cos_sim(user_embedding, cached_embeddings).squeeze().tolist()
+    
+    # 2. BM25 유사도 계산
+    tokenized_query = list(user_input)  # 한글 글자 단위로 토큰화
+    bm25_scores = cached_bm25.get_scores(tokenized_query)
+    
+    # 3. 정규화 (0~1 범위로)
+    sbert_scores_normalized = np.array(sbert_scores)
+    bm25_scores_normalized = (bm25_scores - bm25_scores.min()) / (bm25_scores.max() - bm25_scores.min() + 1e-10)
+    
+    # 4. 하이브리드 스코어 계산 (BM25 40% + SBERT 60%)
+    hybrid_scores = 0.4 * bm25_scores_normalized + 0.6 * sbert_scores_normalized
+    
+    # 5. 최고 스코어 선택
+    best_index = int(np.argmax(hybrid_scores))
+    best_match = cached_keys[best_index]
+    best_value = list(info_dict.values())[best_index]
+    best_score = float(hybrid_scores[best_index])
+    
+    logger.info(f"Hybrid Search - Input: {user_input}, Match: {best_match}, "
+                f"BM25: {bm25_scores_normalized[best_index]:.3f}, "
+                f"SBERT: {sbert_scores_normalized[best_index]:.3f}, "
+                f"Hybrid: {best_score:.3f}")
+    
+    if yn:
+        if best_score < args.sim_threshold:
+            available = "계산이 불가능합니다."
+        else:
+            available = "계산이 가능합니다."
+        return best_match, best_value, best_score, available
+    return best_match, best_value, best_score
+
+# 레거시 호환: 기존 함수 이름 유지 (내부적으로 하이브리드 검색 사용)
+def get_best_match(user_input, info_dict, cached_embeddings, cached_keys, yn=False, cached_bm25=None):
+    """
+    유사도 계산 함수 (하이브리드 검색 지원)
+    cached_bm25가 제공되면 하이브리드 검색, 없으면 SBERT만 사용
+    """
+    if cached_bm25 is not None:
+        return get_best_match_hybrid(user_input, info_dict, cached_embeddings, cached_keys, cached_bm25, yn)
+    
+    # Fallback: SBERT만 사용 (기존 로직)
+    user_embedding = embedding_model.encode([user_input])[0]
     cosine_sim = util.cos_sim(user_embedding, cached_embeddings).squeeze().tolist()
     best_index = cosine_sim.index(max(cosine_sim))
     best_match = cached_keys[best_index]
     best_value = list(info_dict.values())[best_index]
     best_score = max(cosine_sim)
-    print(best_match, best_score)
+    logger.info(f"SBERT Only - Input: {user_input}, Match: {best_match}, Score: {best_score:.3f}")
     
     if yn:
         if best_score < args.sim_threshold:
@@ -554,10 +602,10 @@ holiday_info = {
     '일요일': {'영업여부': '', '영업시작시간': '11시', '영업종료시간': '20시 30분'}
 }
 
-# 초기화 시 메뉴 임베딩 생성
-menu_keys, menu_embeddings = initialize_embeddings(menu_info)
-payment_keys, payment_embeddings = initialize_embeddings(payment_info)
-holiday_keys, holiday_embeddings = initialize_embeddings(holiday_info)
+# 초기화 시 메뉴 임베딩 및 BM25 생성 (하이브리드 검색)
+menu_keys, menu_embeddings, menu_bm25 = initialize_embeddings(menu_info)
+payment_keys, payment_embeddings, payment_bm25 = initialize_embeddings(payment_info)
+holiday_keys, holiday_embeddings, holiday_bm25 = initialize_embeddings(holiday_info)
 
 # NER 인퍼런스 함수
 def get_named_entities(text, model, tokenizer, label_list):
@@ -618,6 +666,14 @@ def get_named_entities(text, model, tokenizer, label_list):
     return entities
 
 # === Flask 엔드포인트 === #
+@app.route('/health', methods=['GET'])
+def health():
+    return jsonify({"status": "healthy", "service": "beaver-ars"})
+
+@app.route('/metrics', methods=['GET'])
+def metrics():
+    return jsonify({"status": "ok"})
+
 @app.route('/order', methods=['POST'])
 def order():
     start_time = time.time()
@@ -666,18 +722,18 @@ def order():
                     
         if intent_id in [1, 14, 21]:
             if intent_id == 1:
-                cached_keys, cached_embeddings = menu_keys, menu_embeddings
+                cached_keys, cached_embeddings, cached_bm25 = menu_keys, menu_embeddings, menu_bm25
                 select_info = menu_info
                 
             elif intent_id == 14:
-                cached_keys, cached_embeddings = payment_keys, payment_embeddings
+                cached_keys, cached_embeddings, cached_bm25 = payment_keys, payment_embeddings, payment_bm25
                 select_info = payment_info
                 
             elif intent_id == 21:
-                cached_keys, cached_embeddings = holiday_keys, holiday_embeddings
+                cached_keys, cached_embeddings, cached_bm25 = holiday_keys, holiday_embeddings, holiday_bm25
                 select_info = holiday_info
             
-            extracted_info = get_best_match(target_entity or user_message, select_info, cached_embeddings, cached_keys, yn=intent_id == 14)
+            extracted_info = get_best_match(target_entity or user_message, select_info, cached_embeddings, cached_keys, yn=intent_id == 14, cached_bm25=cached_bm25)
             if extracted_info:
                 if intent_id == 14:
                     best_match, best_value, best_score, available = extracted_info

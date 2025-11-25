@@ -2,8 +2,15 @@ import speech_recognition as sr
 import requests
 import time
 import logging
-from RealtimeTTS import TextToAudioStream, GTTSEngine
 from flask import Flask, jsonify, request, render_template
+
+# Optional: RealtimeTTS (requires Python 3.10+)
+try:
+    from RealtimeTTS import TextToAudioStream, GTTSEngine
+    REALTIME_TTS_AVAILABLE = True
+except ImportError:
+    REALTIME_TTS_AVAILABLE = False
+    logging.warning("RealtimeTTS not available (requires Python 3.10+)")
 
 def get_response_from_local_model(recognized_text):
    

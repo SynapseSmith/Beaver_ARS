@@ -10,6 +10,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     gcc \
     g++ \
     git \
+    portaudio19-dev \
+    python3-pyaudio \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy requirements and install Python dependencies
@@ -25,6 +27,8 @@ WORKDIR /app
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libgomp1 \
     curl \
+    portaudio19-dev \
+    libasound2-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy Python packages from builder
@@ -36,12 +40,11 @@ ENV PATH=/root/.local/bin:$PATH
 # Copy application code
 COPY src/ ./src/
 COPY config/ ./config/
-COPY models/ ./models/
 COPY templates/ ./templates/
 COPY static/ ./static/
 
-# Create necessary directories
-RUN mkdir -p logs data/temp
+# Create necessary directories (models will be mounted as volume)
+RUN mkdir -p logs data/temp models/intent_classifier models/ner_model
 
 # Set environment variables
 ENV PYTHONUNBUFFERED=1
@@ -64,4 +67,4 @@ CMD ["gunicorn", \
      "--log-level", "info", \
      "--access-logfile", "-", \
      "--error-logfile", "-", \
-     "src.web_server:app"]
+     "src.main_ars_system:app"]

@@ -124,7 +124,7 @@ def compute_metrics(eval_pred):
 # TrainingArguments 설정
 training_args = TrainingArguments(
     output_dir=args.model_path,
-    evaluation_strategy="epoch",
+    eval_strategy="epoch",
     save_strategy="epoch",
     load_best_model_at_end=True,
     logging_dir="./logs",

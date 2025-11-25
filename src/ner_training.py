@@ -295,7 +295,7 @@ def compute_metrics(p):
 # ------------------------------
 training_args = TrainingArguments(
     output_dir=args.output_dir,
-    evaluation_strategy="epoch",
+    eval_strategy="epoch",
     learning_rate=args.learning_rate,
     per_device_train_batch_size=args.batch_size,
     per_device_eval_batch_size=args.batch_size,
@@ -347,7 +347,7 @@ print("Classification Report:")
 print(results['eval_report'])
 
 # 모델 및 토크나이저 저장
-output_model_dir = args.output_model_dir
+output_model_dir = args.output_dir
 trainer.save_model(output_model_dir)
 tokenizer.save_pretrained(output_model_dir)
 print(f"모델이 '{output_model_dir}' 디렉토리에 저장되었습니다.")

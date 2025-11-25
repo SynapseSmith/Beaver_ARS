@@ -43,11 +43,12 @@ INTENT_MODEL_DIR="${MODEL_DIR}/intent_classifier"
 NER_MODEL_DIR="${MODEL_DIR}/ner_model"
 
 # Training parameters
-INTENT_EPOCHS=20
-NER_EPOCHS=15
-BATCH_SIZE=32  # RTX 5090 32GB VRAM 활용
-LEARNING_RATE=2e-5
-GRADIENT_ACCUMULATION=1  # Effective batch size = 32
+INTENT_EPOCHS=30
+NER_EPOCHS=30
+BATCH_SIZE=16  # RTX 5090 32GB VRAM 활용
+INTENT_LEARNING_RATE=1e-4
+NER_LEARNING_RATE=5e-5
+GRADIENT_ACCUMULATION=4  # Effective batch size = 32
 MODEL_NAME="klue/roberta-large"  # 원래 모델로 복구
 
 # Function: Check prerequisites
@@ -233,7 +234,7 @@ test_inference() {
     echo -e "\n${BLUE}Intent Classification Test:${NC}"
     ${PYTHON_CMD} src/241215_step1_inference_cls_intent.py \
         --model_path "${INTENT_MODEL_DIR}" \
-        --text "김치찌개 2개 주문할게요"
+        --text "영업시간이 언제인가요?"
 }
 
 # Function: Print summary
@@ -274,7 +275,7 @@ main() {
     echo "  • Intent Classifier: ${INTENT_EPOCHS} epochs"
     echo "  • NER Model: ${NER_EPOCHS} epochs"
     echo "  • Batch Size: ${BATCH_SIZE}"
-    echo "  • Learning Rate: ${LEARNING_RATE}"
+    echo "  • Learning Rate: ${INTENT_LEARNING_RATE}, ${NER_LEARNING_RATE}"
     # read -p "Continue? (y/n): " confirm
     
     # if [ "$confirm" != "y" ]; then

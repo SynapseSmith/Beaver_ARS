@@ -136,7 +136,7 @@ def compute_metrics(p):
 # TrainingArguments 설정
 training_args = TrainingArguments(
     output_dir=args.model_path,
-    evaluation_strategy="epoch",
+    eval_strategy="epoch",
     save_strategy="epoch",
     logging_dir="./logs",
     per_device_eval_batch_size=16,
@@ -172,8 +172,10 @@ predicted_labels = np.argmax(predictions.predictions, axis=2)
 test_results = []
 for i, example in enumerate(test_dataset):
     tokens = example["tokens"]
-    actual = [id_to_label[l] for l in example["labels"] if l != -100]
-    predicted = [id_to_label[p] for p, l in zip(predicted_labels[i], example["labels"]) if l != -100]
+    # 텐서를 정수로 변환
+    labels = [int(l) for l in example["labels"]]
+    actual = [id_to_label[l] for l in labels if l != -100]
+    predicted = [id_to_label[p] for p, l in zip(predicted_labels[i], labels) if l != -100]
     test_results.append({"tokens": tokens, "actual": actual, "predicted": predicted})
 
 results_df = pd.DataFrame(test_results)
