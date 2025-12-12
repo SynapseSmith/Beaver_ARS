@@ -8,7 +8,7 @@
 [![License](https://img.shields.io/badge/License-MIT-lightgrey.svg)](LICENSE)
 
 > **KLUE/RoBERTa-Large 기반 Intent Classification (48 classes) + NER (6 entities)을 활용한 레스토랑 자동 응답 시스템**  
-> 고객 문의를 실시간으로 이해하고, 하이브리드 검색 + SQL DB 기반 정확한 응답을 생성하는 프로덕션급 챗봇 솔루션
+> 고객 문의를 실시간으로 이해하고, 하이브리드 검색 + SQL DB 기반 정확한 응답을 생성하는 챗봇 솔루션
 
 ---
 
